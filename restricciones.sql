@@ -37,8 +37,6 @@ ALTER TABLE Recomendar ADD CONSTRAINT pk_GerSub_r PRIMARY KEY(idProducto,idProdu
 
 /*Restricciones de integridad referencial por llaves externas (foráneas).*/
 ALTER TABLE SucursalTelefono ADD CONSTRAINT fk_idSucursal_st FOREIGN KEY(idSucursal) REFERENCES Sucursal(idSucursal) ON DELETE CASCADE;
-ALTER TABLE CURPFnacEmp ADD CONSTRAINT fk_curp FOREIGN KEY(CURP) REFERENCES Empleado(CURP) ON DELETE CASCADE;
-ALTER TABLE FechaPedPromo ADD CONSTRAINT fk_fechaPed FOREIGN KEY(fechaPedido) REFERENCES Pedido(fechaPedido) ON DELETE CASCADE;
 ALTER TABLE Pedido ADD CONSTRAINT fk_idSucursal_p FOREIGN KEY(idSucursal) REFERENCES Sucursal(idSucursal) ON DELETE CASCADE;
 ALTER TABLE ProductoLeyenda ADD CONSTRAINT fk_idProducto_pl FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE ProdHist ADD CONSTRAINT fk_idProducto_ph FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
@@ -68,32 +66,32 @@ ALTER TABLE Recomendar ADD CONSTRAINT fk_idProducto_rec FOREIGN KEY(idProducto) 
 ALTER TABLE Recomendar ADD CONSTRAINT fk_idProductoSalsa FOREIGN KEY(idProductoSalsa) REFERENCES Salsa(idProducto) ON DELETE CASCADE;
 
 /*Restricciones de chequeos.*/
-ALTER TABLE Sucursal ADD CONSTRAINT ch_horario CHECK horaApertura < horaCierre;
+ALTER TABLE Sucursal ADD CONSTRAINT ch_horario CHECK (horaApertura < horaCierre);
 ALTER TABLE Cliente ADD CONSTRAINT ch_fechapv CHECK (TO_CHAR(fechaPrimerVista, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK numPuntos >= 0; -- No se puede tener una cantidad negativa de puntos.
+ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
 ALTER TABLE CURPFnacEmp ADD CONSTRAINT ch_fechaNac CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
 ALTER TABLE Empleado ADD CONSTRAINT ch_fechaCon CHECK (TO_CHAR(fechaContratacion, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-');
-ALTER TABLE Empleado ADD CONSTRAINT ch_tipo_emp CHECK tipo IN ('PARRILLERO','TAQUERO','MESERO','CAJERO','TORTILLERO','TACORIDER');
-ALTER TABLE Empleado ADD CONSTRAINT ch_salario CHECK salario >= 0; --Quizá trabajen sin sueldo por un periodo de prueba.
+ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
+ALTER TABLE Empleado ADD CONSTRAINT ch_tipo_emp CHECK (tipo IN ('PARRILLERO','TAQUERO','MESERO','CAJERO','TORTILLERO','TACORIDER'));
+ALTER TABLE Empleado ADD CONSTRAINT ch_salario CHECK (salario >= 0); --Quizá trabajen sin sueldo por un periodo de prueba.
 ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_fechaPed_fpr CHECK (TO_CHAR(fechapPedido, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_promo CHECK promocion IN ('JUEVES POZOLERO','TACO AMIGO', 'MARTES DE TORTUGA');
+ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_promo CHECK (promocion IN ('JUEVES POZOLERO','TACO AMIGO', 'MARTES DE TORTUGA'));
 ALTER TABLE Pedido ADD CONSTRAINT ch_fechaPed_p CHECK (TO_CHAR(fechapPedido, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK IN ('EFECTIVO','TARJETA DÉBITO','TARJETA CRÉDITO','CRYPTOCURRENCY','VALES');
-ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK puntosOtorgar >= 0; --No podemos asignar puntos negativos.
-ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK precio >= 0; --Quizás haya cosas gratis a veces.
-ALTER TABLE Producto ADD CONSTRAINT ch_taquegoria CHECK taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES'); --Quizás haya cosas gratis a veces.
+ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DÉBITO','TARJETA CRÉDITO','CRYPTOCURRENCY','VALES'));
+ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
+ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
+ALTER TABLE Producto ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
 ALTER TABLE Historico ADD CONSTRAINT ch_fechaAct CHECK (TO_CHAR(fechaActualizacion, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Ingrediente ADD CONSTRAINT ch_cantidadExistencia CHECK precio >= 0; --No puede faltar negativamente.
+ALTER TABLE Ingrediente ADD CONSTRAINT ch_cantidadExistencia CHECK (precio >= 0); --No puede faltar negativamente.
 ALTER TABLE Ingrediente ADD CONSTRAINT ch_fechaCaducidad  CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Salsa ADD CONSTRAINT ch_scoville  CHECK scoville <= 2,480,000; --El máximo valor de qué tan picante es la salsa en la escala. 
-ALTER TABLE Transporte ADD CONSTRAINT ch_tipo_tr  CHECK tipo IN ('BICICLETA','MOTOCICLETA');
+ALTER TABLE Salsa ADD CONSTRAINT ch_scoville  CHECK (scoville IN ('DULCE','BAJO','MEDIO','ALTO','EXTREMO'));
+ALTER TABLE Transporte ADD CONSTRAINT ch_tipo_tr  CHECK (tipo IN ('BICICLETA','MOTOCICLETA'));
 ALTER TABLE Proveedor ADD CONSTRAINT ch_inicioRel CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
 ALTER TABLE Dirigir ADD CONSTRAINT ch_inicioDir CHECK (TO_CHAR(fechaInicio, 'YYYY-MM-DD') >= '1940-12-31');
-ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK cantidad >= 0; --No puede tener un pedido una cantidad negativa de productos.
-ALTER TABLE ProveerIng ADD CONSTRAINT ch_precio_ping CHECK precio >= 0; --Tal vez como parte de una oferta le dé cosas gratis al local.
-ALTER TABLE ProveerMob ADD CONSTRAINT ch_precio_pmob CHECK precio >= 0; --Tal vez como parte de una oferta le dé cosas gratis al local.
-ALTER TABLE Tener ADD CONSTRAINT ch_cantidad_ten CHECK cantidad >= 0; --No puede tener un producto una cantidad negativa de un ingrediente.
+ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK (cantidad >= 0); --No puede tener un pedido una cantidad negativa de productos.
+ALTER TABLE ProveerIng ADD CONSTRAINT ch_precio_ping CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.
+ALTER TABLE ProveerMob ADD CONSTRAINT ch_precio_pmob CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.
+ALTER TABLE Tener ADD CONSTRAINT ch_cantidad_ten CHECK (cantidad >= 0); --No puede tener un producto una cantidad negativa de un ingrediente.
 
 /*Restricciones de unicidad.*/
 ALTER TABLE Cliente ADD CONSTRAINT unq_email_cl UNIQUE (email); --Hay una dirección de correo electrónico para cada cliente; no coinciden.
