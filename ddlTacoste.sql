@@ -26,6 +26,9 @@ CREATE TABLE SucursalTelefono(
         telefono VARCHAR2(20) NOT NULL
 );
 
+ALTER TABLE SucursalTelefono ADD CONSTRAINT pk_tel_idSucursal PRIMARY KEY(idSucursal,telefono);
+ALTER TABLE SucursalTelefono ADD CONSTRAINT fk_idSucursal FOREIGN KEY(idSucursal) REFERENCES Sucursal(idSucursal) ON DELETE CASCADE;
+
 --e
 CREATE TABLE CPEdoCliente(
         CP NUMBER(5) NOT NULL,
@@ -61,6 +64,10 @@ CREATE TABLE CURPFnacEmp(
         CURP CHAR(18) NOT NULL,
         fechaNac DATE NOT NULL
 );
+
+ALTER TABLE CURPFnacEmp ADD CONSTRAINT pk_curp PRIMARY KEY(CURP);
+ALTER TABLE CURPFnacEmp ADD CONSTRAINT fk_curp FOREIGN KEY(CURP) REFERENCES Empleado(CURP) ON DELETE CASCADE;
+ALTER TABLE CURPFnacEmp ADD CONSTRAINT ch_fechaNac CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
 
 --e
 CREATE TABLE Empleado(
@@ -110,6 +117,11 @@ CREATE TABLE Producto(
         taquegoria VARCHAR2(50) NOT NULL
 );
 
+ALTER TABLE Producto ADD CONSTRAINT pk_idProducto PRIMARY KEY(idProducto);
+ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos CHECK puntosOtorgar >= 0; --No podemos asignar puntos negativos.
+ALTER TABLE Producto ADD CONSTRAINT ch_precio CHECK precio >= 0; --Quizás haya cosas gratis a veces.
+ALTER TABLE Producto ADD CONSTRAINT ch_taquegoria CHECK taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES'); --Quizás haya cosas gratis a veces.
+
 --e
 CREATE TABLE ProductoLeyenda(
         idProducto INTEGER NOT NULL,
@@ -139,6 +151,10 @@ CREATE TABLE Ingrediente(
         cantidadExistencia INTEGER NOT NULL,
         fechaCaducidad DATE NOT NULL
 );
+
+ALTER TABLE Ingrediente ADD CONSTRAINT pk_idIngrediente PRIMARY KEY(idIngrediente);
+ALTER TABLE Ingrediente ADD CONSTRAINT ch_cantidadExistencia CHECK precio >= 0; --No puede faltar negativamente.
+ALTER TABLE Ingrediente ADD CONSTRAINT ch_fechaCaducidad  CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
 
 --e
 CREATE TABLE Salsa(
@@ -178,6 +194,11 @@ CREATE TABLE Proveedor(
         numExterior INTEGER NOT NULL
 );
 
+ALTER TABLE Proveedor ADD CONSTRAINT pk_rfc PRIMARY KEY(RFC);
+ALTER TABLE Proveedor ADD CONSTRAINT ch_inicioRel CHECK (TO_CHAR(fechaNac, 'YYYY-MM-DD') >= '1940-12-31');
+ALTER TABLE Proveedor ADD CONSTRAINT unq_razonSocial UNIQUE (razonSocialC); --No puede haber legalmente dos proveedores con la misma razón social. 
+ALTER TABLE Proveedor ADD CONSTRAINT unq_email UNIQUE (email); --Hay una direccón de correo electrónico para cada proveedor; no coinciden.
+
 --e
 CREATE TABLE CPEdoProveedor(
         CP NUMBER(5) NOT NULL,
@@ -201,6 +222,9 @@ CREATE TABLE Licencia(
         taquiClave INTEGER NOT NULL,
         codigo VARCHAR2(30) NOT NULL
 );
+
+ALTER TABLE Licencia ADD CONSTRAINT pk_taquiClave PRIMARY KEY(taquiClave);
+ALTER TABLE Licencia ADD CONSTRAINT fk_taquiClave FOREIGN KEY(taquiClave) REFERENCES Empleado(taquiClave) ON DELETE CASCADE;
 
 --e
 CREATE TABLE Poseer(
@@ -228,6 +252,11 @@ CREATE TABLE Contener(
         cantidad INTEGER NOT NULL
 );
 
+ALTER TABLE Contener ADD CONSTRAINT pk_numPedidProd PRIMARY KEY(numPedido,idProducto);
+ALTER TABLE Contener ADD CONSTRAINT fk_idnumPedido FOREIGN KEY(numPedido) REFERENCES Pedido(numPedido) ON DELETE CASCADE;
+ALTER TABLE Contener ADD CONSTRAINT fk_idProducto FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
+ALTER TABLE Contener ADD CONSTRAINT ch_cantidad CHECK cantidad >= 0; --No puede tener un pedido una cantidad negativa de productos.
+
 --e
 CREATE TABLE Conservar(
         idProducto INTEGER NOT NULL,
@@ -254,6 +283,11 @@ CREATE TABLE Tener(
         idIngrediente INTEGER NOT NULL,
         cantidad INTEGER NOT NULL
 );
+
+ALTER TABLE Tener ADD CONSTRAINT pk_idProdidIng PRIMARY KEY(idProducto,idIngrediente);
+ALTER TABLE Tener ADD CONSTRAINT fk_idProducto FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
+ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente FOREIGN KEY(idIngrediente) REFERENCES Ingrediente(idIngrediente) ON DELETE CASCADE;
+ALTER TABLE Tener ADD CONSTRAINT ch_cantidad CHECK cantidad >= 0; --No puede tener un producto una cantidad negativa de un ingrediente.
 
 --e
 CREATE TABLE Recomendar(
