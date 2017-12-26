@@ -3,6 +3,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+NOMBRE_APP = "inicio"
 
 def index(request):
-    return HttpResponse("Aqui es donde estará la página de inicio")
+    template = NOMBRE_APP + "/index.html"
+    return render(request, template)
