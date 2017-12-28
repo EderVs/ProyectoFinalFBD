@@ -1,0 +1,55 @@
+body {
+    margin: 0px;
+}
+
+header {
+    border-bottom: 0.20px solid #e5e5e5;
+    height: 50px;
+    margin: 0px;
+    padding: 13px;
+    position: relative;
+}
+
+header div {
+    display: inline;
+}
+
+#botones-header {
+    float: right;
+    margin-top: 12px;
+    margin-right: 20%;
+    position: relative;
+    height: 50px;
+}
+
+#canasta {
+    display: inline-block;
+}
+
+#logo {
+    display: inline-block;
+    margin-left: 20%;
+}
+
+#logo img {
+    height: 50px;
+}
+
+.boton-header {
+    display: inline;
+    border: 0.20px solid green;
+    padding: 12px 5px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.inicio-sesion {
+    border-color: #E0E0E0;
+}
+
+.registrate {
+    border-color: #262626;
+    background-color: #262626;
+    color: white;
+    padding: 12px 13px;
+}

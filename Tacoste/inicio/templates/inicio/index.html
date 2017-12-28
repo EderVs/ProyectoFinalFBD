@@ -1,10 +1,67 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Tacoste</title>
         {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/index.css' %}">
     </head>
     <body>
-        Tacoste
-        <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+        <header>
+            <div id="logo">
+                <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+            </div>
+            <div id="botones-header">
+                <div class="boton inicio-sesion boton-header">Iniciar sesion</div>
+                <div class="boton registrate boton-header">Regístrate</div>
+                <div id="canasta">Canasta</div>
+            </div>
+        </header>
+        <div class="imagen-grande">
+            <picture>
+                imagen
+            </picture>
+        </div>
+        <h2>Sucursales</h2>
+        <div>
+            <article class="caja">
+                <div>
+                    <h3 class="sucursal-direccion">Direccion</h3>
+                    <span class="sucursal-telefono">Telefono</span>
+                </div>
+                <picture>
+                    imagen
+                </picture>
+            </article>
+            <article class="caja">
+                <div>
+                    <h3 class="sucursal-direccion">Direccion</h3>
+                    <span class="sucursal-telefono">Telefono</span>
+                </div>
+                <picture>
+                    imagen
+                </picture>
+            </article>
+            <article class="caja">
+                <div>
+                    <h3 class="sucursal-direccion">Direccion</h3>
+                    <span class="sucursal-telefono">Telefono</span>
+                </div>
+                <picture>
+                    imagen
+                </picture>
+            </article>
+        </div>
+        <footer>
+            <div>
+                <picture id="logo">
+                    <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                </picture>
+                <span>¿Quienes somos?</span>
+                <span>2018</span>
+                <picture>
+                    imagen
+                </picture>
+            </div>
+        </footer>
     </body>
 </html>
