@@ -82,6 +82,28 @@ header div {
     margin-left: 20px;
 }
 
+.caja h4 {
+    margin-top: 12px;
+}
+
+.caja img {
+    display: inline-block;
+    height: 160px;
+    position: absolute;
+    width: 160px;
+}
+
+.caja-contenido {
+    display: inline-block;
+    padding: 17px 20px;
+    width: 373px;
+    height: 160px;
+}
+
+.caja-direccion {
+    display: block;
+}
+
 .imagen-grande {
     height: 370px;
     position: absolute;
@@ -104,4 +126,9 @@ header div {
     background-color: #262626;
     color: white;
     padding: 12px 13px;
+}
+
+.sucursal-direccion {
+    margin-bottom: 0;
+    margin-top: 12px;
 }
