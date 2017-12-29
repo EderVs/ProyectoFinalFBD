@@ -1,7 +1,6 @@
 body {
     margin: 0px;
     font-family: 'Nunito', sans-serif;
-    font-family: 'Merriweather Sans', sans-serif;
     font-size: 15px;
 }
 
@@ -37,10 +36,9 @@ header div {
 #contenido {
     background-color: white;
     height: 100%;
-    padding-left: 20%;
-    padding-top: 30px;
+    padding-left: 32px auto;
     position: absolute;
-    top: 445px;
+    top: 446px;
     width: 100%;
     z-index: 1;
 }
@@ -54,12 +52,34 @@ header div {
     height: 50px;
 }
 
+#sucursales {
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 1174px;
+}
+
+#sucursales-titulo {
+    margin-bottom: 10px;
+}
+
 .boton-header {
     display: inline;
     border: 0.20px solid green;
     padding: 12px 5px;
     text-align: center;
     margin-right: 10px;
+}
+
+.caja {
+    border: 1px solid #E0E0E0;
+    display: inline-block;
+    height: 160px;
+    margin-top: 24px;
+    width: 573px;
+}
+
+.caja:nth-child(even) {
+    margin-left: 20px;
 }
 
 .imagen-grande {
