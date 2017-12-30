@@ -4,6 +4,14 @@ body {
     font-size: 15px;
 }
 
+footer {
+    background-color: #262626;
+    color: white;
+    font-size: 14px;
+    padding: 54px 20%;
+    width: 60%;
+}
+
 header {
     border-bottom: 0.20px solid #e5e5e5;
     height: 50px;
@@ -35,12 +43,14 @@ header div {
 
 #contenido {
     background-color: white;
-    height: 100%;
-    padding-left: 32px auto;
     position: absolute;
     top: 446px;
     width: 100%;
     z-index: 1;
+}
+
+#footer-enlaces {
+    margin-top: 20px;
 }
 
 #logo {
@@ -52,9 +62,14 @@ header div {
     height: 50px;
 }
 
+#privacidad-terminos {
+    border-top: 1px solid white;
+    padding-top: 20px;
+}
+
 #sucursales {
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px auto;
+    margin-bottom: 40px;
     width: 1174px;
 }
 
@@ -64,7 +79,8 @@ header div {
 
 .boton-header {
     display: inline;
-    border: 0.20px solid green;
+    border: 1px solid green;
+    border-radius: 2px;
     padding: 12px 5px;
     text-align: center;
     margin-right: 10px;
@@ -74,7 +90,7 @@ header div {
     border: 1px solid #E0E0E0;
     display: inline-block;
     height: 160px;
-    margin-top: 24px;
+    margin-bottom: 24px;
     width: 573px;
 }
 
@@ -104,6 +120,11 @@ header div {
     display: block;
 }
 
+.footer-enlaces {
+    display: block;
+    margin-bottom: 20px;
+}
+
 .imagen-grande {
     height: 370px;
     position: absolute;
@@ -119,6 +140,17 @@ header div {
 
 .inicio-sesion {
     border-color: #E0E0E0;
+}
+
+.logo {
+    border-bottom: 0.20px solid #FFF;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.logo img {
+    height: 50px;
+
 }
 
 .registrate {
