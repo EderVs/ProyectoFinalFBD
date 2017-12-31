@@ -1,0 +1,29 @@
+
+#menu {
+    margin: 30px auto;
+    margin-bottom: 40px;
+    width: 1174px;
+}
+
+#menu-titulo {
+    margin-bottom: 10px;
+}
+
+.imagen-grande-caja-fantasma {
+    display: block;
+    margin: 58px 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.imagen-grande-caja {
+    background-color: white;
+    display: block;
+    height: 192px;
+    margin: 0 auto;
+    padding: 32px;
+    width: 400px;
+}
+
