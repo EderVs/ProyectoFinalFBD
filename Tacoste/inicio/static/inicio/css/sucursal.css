@@ -1,3 +1,10 @@
+nav {
+    border-bottom: 1px solid #E0E0E0;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    width: 1435px;
+}
 
 #menu {
     margin: 30px auto;
@@ -20,6 +27,7 @@
 
 .imagen-grande-caja {
     background-color: white;
+    border-radius: 4px;
     display: block;
     height: 192px;
     margin: 0 auto;
@@ -27,3 +35,5 @@
     width: 400px;
 }
 
+.menu-nav {
+    margin: auto 12px;
