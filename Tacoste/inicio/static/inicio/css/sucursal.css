@@ -16,6 +16,14 @@ nav {
     margin-bottom: 10px;
 }
 
+.caja-contenido {
+    position: relative;
+}
+
+.caja-contenido h4 {
+    margin-bottom: 0px;
+}
+
 .imagen-grande-caja-fantasma {
     display: block;
     margin: 58px 0;
@@ -37,3 +45,18 @@ nav {
 
 .menu-nav {
     margin: auto 12px;
+}
+
+.platillo-descripcion {
+    display: inline-flex;
+}
+
+.platillo-info {
+    margin: 0px
+}
+
+.platillo-precio {
+    bottom: 12px;
+    left: 20px;
+    position: absolute;
+}
