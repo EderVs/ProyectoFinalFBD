@@ -47,6 +47,10 @@ nav {
     margin: auto 12px;
 }
 
+.menu-nav-highlight {
+    color: #43A422;
+}
+
 .platillo-descripcion {
     display: inline-flex;
 }

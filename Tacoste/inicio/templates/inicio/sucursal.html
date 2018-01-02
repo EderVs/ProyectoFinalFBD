@@ -10,7 +10,9 @@
     <body>
         <header>
             <div id="logo">
-                <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                </a>
             </div>
             <div id="botones-header">
                 <div class="boton inicio-sesion boton-header">Iniciar sesion</div>
@@ -45,51 +47,163 @@
         </div>
         <div id="contenido">
             <nav>
-                <span class="menu-nav">
-                    Entradas
-                </span>
-                <span class="menu-nav">
-                    Gringas y Quecas
-                </span>
-                <span class="menu-nav">
-                    Del Cazo
-                </span>
-                <span class="menu-nav">
-                    Alambres
-                </span>
-                <span class="menu-nav">
-                    Sopes y Huaraches
-                </span>
-                <span class="menu-nav">
-                    Enchiladas
-                </span>
-                <span class="menu-nav">
-                    Nuestros Quesos
-                </span>
-                <span class="menu-nav">
-                    Ensaladas
-                </span>
-                <span class="menu-nav">
-                    Tacos
-                </span>
-                <span class="menu-nav">
-                    Bebidas
-                </span>
-                <span class="menu-nav">
-                    Hamburguesas
-                </span>
-                <span class="menu-nav">
-                    Lo Caliente
-                </span>
-                <span class="menu-nav">
-                    Tortas
-                </span>
-                <span class="menu-nav">
-                    Postres
-                </span>
+                <a href="{% url 'sucursal' 'entradas' %}">
+                    {% if parte_menu == 'entradas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Entradas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Entradas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'gringas-y-quecas' %}">
+                    {% if parte_menu == 'gringas-y-quecas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Gringas y Quecas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Gringas y Quecas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'del-cazo' %}">
+                    {% if parte_menu == 'del-cazo' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Del Cazo
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Del Cazo
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'alambres' %}">
+                    {% if parte_menu == 'alambres' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Alambres
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Alambres
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'sopes-y-huaraches' %}">
+                    {% if parte_menu == 'sopes-y-huaraches' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Sopes y Huaraches
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Sopes y Huaraches
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'enchiladas' %}">
+                    {% if parte_menu == 'enchiladas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Enchiladas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Enchiladas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'nuestros-quesos' %}">
+                    {% if parte_menu == 'nuestros-quesos' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Nuestros Quesos
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Nuestros Quesos
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'ensaladas' %}">
+                    {% if parte_menu == 'ensaladas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Ensaladas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Ensaladas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'tacos' %}">
+                    {% if parte_menu == 'tacos' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Tacos
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Tacos
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'bebidas' %}">
+                    {% if parte_menu == 'bebidas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Bebidas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Bebidas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'hamburguesas' %}">
+                    {% if parte_menu == 'hamburguesas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Hamburguesas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Hamburguesas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'lo-caliente' %}">
+                    {% if parte_menu == 'lo-caliente' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Lo Caliente
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Lo Caliente
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'tortas' %}">
+                    {% if parte_menu == 'tortas' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Tortas
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Tortas
+                    </span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'sucursal' 'postres' %}">
+                    {% if parte_menu == 'postres' %}
+                    <span class="menu-nav menu-nav-highlight">
+                        Postres
+                    </span>
+                    {% else %}
+                    <span class="menu-nav">
+                        Postres
+                    </span>
+                    {% endif %}
+                </a>
             </nav>
             <div id="menu">
-                <h2 id="menu-titulo">Título Menú</h2>
+                <h2 id="menu-titulo">{{ parte_menu_titulo }}</h2>
                 <div>
                     <article class="caja">
                         <div class="caja-contenido">
