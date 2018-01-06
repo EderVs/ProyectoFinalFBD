@@ -73,7 +73,7 @@ ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- N
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipo_emp CHECK (tipo IN ('PARRILLERO','TAQUERO','MESERO','CAJERO','TORTILLERO','TACORIDER'));
 ALTER TABLE Empleado ADD CONSTRAINT ch_salario CHECK (salario >= 0); --Quizá trabajen sin sueldo por un periodo de prueba.
-ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_promo CHECK (promocion IN ('JUEVES POZOLERO','TACO AMIGO', 'MARTES DE TORTUGA'));
+ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_promo CHECK (promocion IN ('JUEVES POZOLERO','TACO AMIGO', 'MARTES DE TORTUGA', 'NINGUNA'));
 ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DEBITO','TARJETA CREDITO','CRYPTOCURRENCY','VALES'));
 ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
 ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
