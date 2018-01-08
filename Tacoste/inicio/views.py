@@ -4,12 +4,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from . import utils
+from .models import Sucursal
 
 NOMBRE_APP = "inicio"
 
 def index(request):
+    sucursales = Sucursal.objects.all()
     template = NOMBRE_APP + "/index.html"
-    return render(request, template)
+    context = {
+        'sucursales': sucursales,
+    }
+    return render(request, template, context)
 
 def sucursal(request, parte_menu):
     template = NOMBRE_APP + "/sucursal.html"
