@@ -103,6 +103,7 @@ ALTER TABLE FechaPedPromo ADD CONSTRAINT ch_promo CHECK (promocion IN ('JUEVES P
 ALTER TABLE Historico ADD CONSTRAINT ch_precio_prevh CHECK (precioPrevio >= 0); --Quizás haya cosas gratis a veces, pero no puede ser negativo.
 ALTER TABLE Historico ADD CONSTRAINT ch_precio_nuevh CHECK (precioNuevo >= 0); --Quizás haya cosas gratis a veces, pero no puede ser negativo.
 ALTER TABLE Ingrediente ADD CONSTRAINT ch_cantidadExistencia CHECK (cantidadExistencia >= 0); --No puede faltar negativamente.
+ALTER TABLE Mobiliario ADD CONSTRAINT ch_tipo CHECK (tipo IN ('MESA','SILLA','BANCO','PLATO','SERVILLETERO')); --Los tipos de mueble especificados en el caso de uso.
 ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DEBITO','TARJETA CREDITO','CRYPTOCURRENCY','VALES'));
 ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
 ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
