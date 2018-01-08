@@ -1,0 +1,191 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color,soul}
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+\usepackage{makeidx}
+\usepackage{colortbl}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\usepackage{rotating}
+\usepackage{url}
+\usepackage{pdflscape} 
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{ marvosym }
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{ mathrsfs }
+ \usepackage{array}
+\usepackage{longtable}
+\newcommand{\justif}[2]{&{#1}&\text{#2}}
+\usepackage{listings}
+\usepackage{color}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\setboolean{@twoside}{false}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usetikzlibrary{graphs,graphs.standard}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\usepackage{multicol}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\begin{document}
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Universidad Nacional Autónoma de México \par}
+	\vspace{1cm}
+	{\scshape\Large Facultad de Ciencias\par}
+	\vspace{1.5cm}
+\begin{center}
+		\includegraphics[scale=.5]{logo.png}
+	\end{center}
+		\vspace{.8 cm}
+
+	{\huge\bfseries Proyecto Final: \par}
+	{\huge\bfseries Análisis de Requerimientos \par}
+		\vspace{0.5cm}
+
+	{\Large\itshape Flores Martínez Andrés\\
+	Vázquez Salcedo Eduardo Eder\\
+	Sánchez Pérez Pedro Juan Salvador\\
+	Concha Vázquez Miguel\par}
+	\vfill
+			\vspace{0.5cm}
+
+	Trabajo presentado en cumplimiento con la asignatura de Fundamentos de Bases de Datos impartida por el profesor	\par
+	 \textsc{Gerardo Avilés Rosas}\\
+	\vspace{0.1cm}
+	{\large 12 de enero de 2018\par}
+\end{titlepage}
+
+\begin{center}
+\tableofcontents
+\end{center}
+
+\newpage
+
+
+Como vimos en la teoría, \textit{el análisis de requerimientos es la parte del
+ciclo de vida de una base de datos en donde se recaba la información acerca
+del usuario que se le pretender dar a la base de datos, lo que implica una
+comprensión completa del problema que pretende resolver. También involucra un acuerdo entre los usuarios del sistema acerca de qué datos deberán ser
+almacenados, cuáles son su significado, relaciones y restricciones. Todo esto
+se especifica claramente en el documento de requerimientos}.\\
+
+ El documento
+de requerimientos para la taquería \textbf{Tacoste} se presenta a continuación.
+
+\section{Problema a resolver y motivo de uso}
+
+Se espera que el sistema desarrollado por la empresa \textbf{Computólogos A.C.} pueda fungir como una herramienta que permita al señor José Cruz llevar a cabo su proyecto de expansión con respecto a la cadena mexicana de tacos \textbf{Tacoste}, que además sea escalable y permita controlar sucursales a lo largo y ancho de la República Mexicana. A través de las posibilidades económicas del cliente en cuestión y las contingencias de mercado se anhela brindarle una solución similar al \textit{software} que poseen franquicias de tacos modernas, mismos que permiten la creación de menús dirigidos y promociones para sectores específicos y que eventualmente conduzcan a la empresa a ser competitiva en el mercado y lograr alianzas comerciales que la beneficien. \\
+
+Específicamente, se desea:
+
+\begin{itemize}
+\item Con tal de poder eventualmente conocer el momento de sacar promociones, poder llevar un registro histórico de los precios y productos de la taquería. 
+\item Otorgar \textit{tickets} por cada consumo.
+\item Minimizar los desperdicios de las sucursales, identificando para esto la cantidad aproximada de porciones de ingredientes a comprar o preparar para vender.
+\item Implementar un sistema de puntos que permitan a clientes frecuentes intercambiar por productos dentro de la taquería sus puntos generados a raíz de sus compras previas.
+\item Tener la posibilidad de manejar promociones ciertos días de la semana. 
+\item Poder ofrecerle a los clientes un sistema de envío a domicilio y tener un sistema de ventas en línea de sus reconocidas salsas.
+\item Ofrecer a los clientes presentar distintas formas de pago.
+\item Identificar a los empleados con una antigüedad de cinco años para ofrecerles un bono especial de mil pesos 00/100 M.N.
+\item Tener un control de inventarios para los productos y los ingredientes que los componen.
+\end{itemize} 
+\section{Usuarios y Áreas de aplicación}
+
+
+\begin{itemize}
+\item Los administradores de las sucursales, gerentes y el señor José Cruz deberán ser capaces de utilizar el sistema provisto con tal de llevar un control de sus subordinados y trabajadores. Más aún, la estructura de la infraestructura del programa será tal que les permita identificar los activos y pasivos de la empresa, identificando oportunidades y deficiencias por cada una de las sucursales a través de los clientes y los pedidos realizados. \\
+
+Por medio de la aplicación web ofrecida como parte del \textit{software} final, serán asimismo capaces de controlar los platillos de la carta presente en cada una de las taquerías, involucrando cuestiones como los precios de los mismos y un manejo exhaustivo de las salsas de \textbf{Tacoste}, detallando ellos los productos con que se recomienda acompañar cada salsa.
+\item Los clientes de la taquería podrán usar la aplicación web con el fin de enterarse de los precios de los productos ofrecidos en las sucursales, los ingredientes de estos, su disponibilidad, etcétera. Además, podrán utilizar la aplicación para realizar pedidos a domicilio y comprar salsas de la empresa para eventos especiales. A través de la aplicación podrán conocer su \textit{status} en cuanto a la cantidad de puntos que han generado en la taquería y saber la ubicación de sucursales cercanas a ellos para visitarlas con mayor comodidad.
+\end{itemize}
+\section{Datos a almacenar y significado}
+
+\begin{itemize}
+\item Sucursales: Los diferentes establecimientos de las taquerías \textbf{Tacoste}, con sus horarios de apertura y cierre, dirección, código postal y teléfono.
+\item Empleados: Los individuos que laboran en las distintas sucursales. Se almacenará la información de su nombre completo, dirección, RFC, CURP, tipo de sangre, fecha de Nacimiento, numero telefónico, dirección de correo electrónico, número de emergencia y su fecha de contratación. Se busca tenerlos vía nómina y otorgarles seguridad social, por lo que los datos son necesarios. Además, será importante tener el tipo de empleado en cuestión en cada caso (parrillero, mesero, taquero, cajero, tortillero o repartidor). En el caso de los repartidores ---mismos que identificaremos como \textbf{TacoRiders}.
+\item Clientes: Las personas que hacen uso de las instalaciones de cada sucursal, yendo a comer ahí o bien realizando pedidos a domicilio o encargos de salsas por medio de la aplicación en línea. Se almacenará un correo electrónico suyo, un número de teléfono, la cantidad de puntos que han generado y la fecha de su primer visita a la taquería.
+\item Productos: Las bebidas, tacos, postres, salsas y demás cosas que puedan ser compradas en la taquería o en línea por medio de la aplicación web. Se guardará información de su precio, nombre del producto, las leyendas que presenta el producto en la carta, así como la categoría (\textbf{taquegoría}) a la que pertenece cada uno (sopes, huaraches, del cazo, entradas, gringas, postres, etcétera). 
+\item Ingredientes: Los elementos que componen los productos vendidos. Se almacenará información acerca de la fecha de caducidad de los ingredientes, su nombre, marca y cantidad en existencia.
+\item Pedidos: Conjunto de varios productos que fueron encargados por uno o varios clientes en una sucursal particular. Se guardará información de la fecha del pedido y la promoción asociada al mismo en caso de que aplique alguna.
+\item Mobiliario: Los enseres que están presentes físicamente en las sucursales como son las mesas, sillas, bancos, platos, servilleteros, entre otros. Se guardará información del tipo de mueble en cuestión.
+\item Proveedores: Son las compañías, empresas, personas físicas o morales que abastecen o han abastecido a las sucursales de ingredientes o mobiliario. Se almacena información correspondiente a una dirección de correo electrónico, RFC, dirección, código postal, razón social, un número telefónico y la fecha en que comenzó la relación con la taquería.
+\end{itemize}
+\subsection{Relaciones entre los datos}
+
+\begin{itemize}
+\item Los clientes realizan pedidos de productos, ya sea físicamente o en línea a través de la aplicación web. Cada pedido tiene asociado el método de pago del cliente representante de la mesa (en caso de una compra física) o que efectúa la compra en línea.
+\item Los productos están contenidos en los pedidos que son ordenados por los clientes. Es importante identificar la cantidad de cada producto que está presente en cada pedido.
+\item Los productos tienen ingredientes que los componen. Análogamente, es importante identificar la cantidad de cada ingrediente que está presente en cada producto.
+\item Los proveedores abastecen ingredientes y/o mobiliario a las sucursales. Será trascendental poder llevar un registro del precio que ofrece el proveedor por esta acción.
+\item Si bien las salsas son un caso particular de los productos, ocurre que las salsas recomiendan productos en el sentido en que identifican los que mejor podrían acompañarlas en su consumo.
+\item Los pedidos se llevan a cabo en sucursales.
+\item Los empleados laboran en sucursales. Es importante notar el salario que recibe como remuneración económica cada empleado por su trabajo en la sucursal.  
+\end{itemize}
+\section{Restricciones}
+\begin{itemize}
+
+\item No deberá ser posible agregar dos veces el mismo cliente, producto
+o clase en el sistema, evitando así la duplicidad de los datos.
+\item Se deberán poder agregar nuevas sucursales en el sistema, así como registrar nuevos clientes y trabajadores.
+\item Se deberá tener la posibilidad de actualizar, eliminar o añadir nuevas promociones.
+\item Será importante cumplir con las normas impuestas por el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) al manipular los datos personales de los clientes en la aplicación en línea. Dado que cabe la posibilidad de que los clientes no deseen presentar algunos de sus datos, entonces deberá ligarse a un cliente por defecto.
+\item Los empleados solamente deberán estar ligados a una sucursal.
+\item En caso de que un producto específico haya sido vendido a un cliente en particular, no deberá ser posible venderlo a otro cliente.
+\item Una vez registrada una sucursal en el sistema, no deberá ser volver a registrarla ---por ejemplo, en otra ubicación. Sin embargo, sí deberá ser posible la actualización de los datos de las sucursales de taquerías, así como la eliminación completa de su información.
+\item Se deberán poder eliminar clientes en específico, pero no el archivo
+de clientes.
+\item Se deberán poder eliminar empleados en específico, pero no el archivo
+de empleados.
+\item Se deberán poder eliminar sucursales en específico, pero no el archivo
+de sucursales.
+\item Para poder vender un producto a un cliente en particular, tanto el producto como el cliente deberán existir.
+\item Deberá ser posible actualizar la información de los clientes, empleados, sucursales
+y productos en cualquier momento.
+\item Deberá ser posible generar un reporte de un cliente, sucursal o empleado en específico
+a partir de su información, productos vendidos o comprados, antigüedad, etcétera.
+\item En el caso de los repartidores, será importante especificarles en el sistema su número de licencia (cuando aplique) y si cuenta o no con transporte.
+
+\end{itemize}
+ \begin{thebibliography}{1}
+
+
+  \bibitem{notes} \textit{Conceptos Básicos}, Avilés Rosas Gerardo. UNAM, Facultad de Ciencias,
+págs. 1-31.
+
+  \bibitem{notes} \textit{Ciclo de vida de una base de datos}, Avilés Rosas Gerardo. UNAM, Facultad de Ciencias,
+págs. 1-8.
+
+  \end{thebibliography}
+\end{document}

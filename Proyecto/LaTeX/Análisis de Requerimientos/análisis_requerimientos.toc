@@ -1,0 +1,6 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Problema a resolver y motivo de uso}{2}
+\contentsline {section}{\numberline {2}Usuarios y \IeC {\'A}reas de aplicaci\IeC {\'o}n}{3}
+\contentsline {section}{\numberline {3}Datos a almacenar y significado}{3}
+\contentsline {subsection}{\numberline {3.1}Relaciones entre los datos}{5}
+\contentsline {section}{\numberline {4}Restricciones}{5}
