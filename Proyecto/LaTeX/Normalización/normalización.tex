@@ -179,7 +179,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
 \item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
-\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
+\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
 \item \footnotesize{\textbf{ProveerMob}(\underline{RFC},\underline{idMueble},precio)}
@@ -873,7 +873,7 @@ Tomando la violación, fraccionamos entonces en dos relaciones, ambas con el det
 \begin{itemize}
 \item CP $\rightarrow$ estado.\\\\ Tenemos que $CP^+ = \{CP,estado\}$. Entonces, el lado izquierdo es superllave y ya no hay violación \checkmark
 \end{itemize}
-\item {\footnotesize \textbf{Sucursal}(CP,\underline{idSucursal}, horaApertura, horaCierre, municipio, colonia, calle, numInterior, numExterior} con:
+\item {\footnotesize \textbf{Sucursal}(CP,\underline{idSucursal}, horaApertura, horaCierre, municipio, colonia, calle, numInterior, numExterior)} con:
 \begin{itemize}
 \item idSucursal $\rightarrow$ horaApertura, horaCierre, municipio, colonia, calle, CP, numInterior, numExterior\\\\Como ocurre que $idSucursal^+=\{idSucursal,horaApertura, horaCierre, municipio,\\ colonia, calle, CP, numInterior, numExterior\}$, entonces el lado izquierdo es superllave y no hay violación. \checkmark
 \end{itemize}
@@ -881,7 +881,7 @@ Tomando la violación, fraccionamos entonces en dos relaciones, ambas con el det
 
 Y ya hemos normalizado la relación a BCNF.
 
-\item \textbf{SucursalTelefono}: La única DF no trivial es la trivial:
+\item \textbf{SucursalTelefono}: La única DF no trivial es:
 
 \begin{itemize}
 \item telefono $\rightarrow$ idSucursal.\\Ocurre que $telefono^+=\{telefono,idSucursal\}$. Como el lado izquierdo es una superllave de la relación, entonces se cumple con que no hay una violación a la forma normal y en consecuencia estaba ya en BCNF. \checkmark
@@ -1132,7 +1132,7 @@ Como se cumple una de las dos condiciones, no constituye una violación a la for
 \item \textbf{Pedido}: Las DFs no triviales que forman parte del conjunto $F$ son:
 
 \begin{itemize}
-\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion. Tenemos que $numPedido^+=\{numPedido,idSucursal, fechaPedido, taquiClave, metodoPago, promocion\}$, por lo que es superllave el lado izquierdo y no es una violación a la 3NF.
+\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion. Tenemos que $numPedido^+=\{numPedido,idSucursal, fechaPedido,\\ taquiClave, metodoPago, promocion\}$, por lo que es superllave el lado izquierdo y no es una violación a la 3NF.
 \item fechaPedido $\rightarrow$ promocion. El lado izquierdo no es una superllave y además el lado derecho no forma parte de una llave candidata porque ya vimos antes que una llave de la relación está conformada por un único atributo y además $promocion^+=\{promocion\}$. Entonces, es una violación a la forma normal.
 \end{itemize}
 
