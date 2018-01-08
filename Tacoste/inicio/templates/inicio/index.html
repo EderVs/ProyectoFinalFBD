@@ -29,27 +29,33 @@
         <div id="contenido">
             <div id="sucursales">
                 <h2 id="sucursales-titulo">Sucursales</h2>
-                <div>
-                    <a href="{% url 'sucursal' 'entradas' %}"><article class="caja">
-                        <div class="caja-contenido">
-                            <h3 class="sucursal-direccion">
-                                <span class="caja-direccion sucursal-calle">
-                                    Alatata 22
-                                </span>
-                                <span class="caja-direccion sucursal-colonia">
-                                    Condesa, Cuauhtemoc
-                                </span>
-                                <span class="caja-direccion sucursal-estado">
-                                    Ciudad de México
-                                </span>
-                            </h3>
-                            <h4>
-                                <span class="sucursal-telefono">5272 7666</span>
-                            </h4>
-                        </div>
-                        <img src="{% static 'inicio/img/sucursal.jpg' %}">
-                        </article></a>
-                </div>
+                {% for sucursal in sucursales %}
+                <a href="{% url 'sucursal' sucursal.idsucursal 'entradas' %}"><article class="caja">
+                    <div class="caja-contenido">
+                        <h3 class="sucursal-direccion">
+                            <span class="caja-direccion sucursal-calle">
+                                {{sucursal.calle}} {{sucursal.numexterior}}
+                            </span>
+                            <span class="caja-direccion sucursal-colonia">
+                                {{sucursal.colonia}}, {{ sucursal.municipio }}
+                            </span>
+                            <span class="caja-direccion sucursal-estado">
+                                {{ sucursal.cp.estado }}
+                            </span>
+                        </h3>
+                        <h4>
+                            <span class="sucursal-telefono">
+                                {% if sucursal.telefono %}
+                                {{ sucursal.telefono.telefono }}
+                                {% else %}
+                                Sin número teléfonico
+                                {% endif %}
+                            </span>
+                        </h4>
+                    </div>
+                    <img src="{% static 'inicio/img/sucursal.jpg' %}">
+                </article></a>
+                {% endfor %}
             </div>
             <footer>
                 <div>

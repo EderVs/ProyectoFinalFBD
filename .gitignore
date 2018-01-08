@@ -103,3 +103,4 @@ ENV/
 *.sqlite3
 
 *.swp
+models1.py
