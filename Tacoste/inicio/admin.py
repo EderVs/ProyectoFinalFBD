@@ -1,5 +1,9 @@
 from django.contrib import admin
 
-from .models import Sucursal
+from . import models
 
-admin.site.register(Sucursal)
+admin.site.register(models.Sucursal)
+admin.site.register(models.Cpedosucursal)
+admin.site.register(models.Sucursaltelefono)
+admin.site.register(models.Producto)
+admin.site.register(models.Productoleyenda)

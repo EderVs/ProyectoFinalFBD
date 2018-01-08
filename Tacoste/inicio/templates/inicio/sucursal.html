@@ -30,24 +30,30 @@
                 <div class="imagen-grande-caja">
                     <h2 class="sucursal-direccion">
                         <span class="caja-direccion sucursal-calle">
-                            Alatata 22
+                            {{sucursal.calle}} {{sucursal.numexterior}}
                         </span>
                         <span class="caja-direccion sucursal-colonia">
-                            Condesa, Cuauhtemoc
+                            {{sucursal.colonia}}, {{ sucursal.municipio }}
                         </span>
                         <span class="caja-direccion sucursal-estado">
-                            Ciudad de México
+                            {{ sucursal.cp.estado }}
                         </span>
                     </h2>
                     <h3>
-                        <span class="sucursal-telefono">5272 7666</span>
+                        <span class="sucursal-telefono">
+                            {% if sucursal.telefono %}
+                            {{ sucursal.telefono.telefono }}
+                            {% else %}
+                            Sin número teléfonico
+                            {% endif %}
+                        </span>
                     </h3>
                 </div>
             </div>
         </div>
         <div id="contenido">
             <nav>
-                <a href="{% url 'sucursal' 'entradas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'entradas' %}">
                     {% if parte_menu == 'entradas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Entradas
@@ -58,7 +64,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'gringas-y-quecas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'gringas-y-quecas' %}">
                     {% if parte_menu == 'gringas-y-quecas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Gringas y Quecas
@@ -69,7 +75,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'del-cazo' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'del-cazo' %}">
                     {% if parte_menu == 'del-cazo' %}
                     <span class="menu-nav menu-nav-highlight">
                         Del Cazo
@@ -80,7 +86,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'alambres' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'alambres' %}">
                     {% if parte_menu == 'alambres' %}
                     <span class="menu-nav menu-nav-highlight">
                         Alambres
@@ -91,7 +97,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'sopes-y-huaraches' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'sopes-y-huaraches' %}">
                     {% if parte_menu == 'sopes-y-huaraches' %}
                     <span class="menu-nav menu-nav-highlight">
                         Sopes y Huaraches
@@ -102,7 +108,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'enchiladas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'enchiladas' %}">
                     {% if parte_menu == 'enchiladas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Enchiladas
@@ -113,7 +119,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'nuestros-quesos' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'nuestros-quesos' %}">
                     {% if parte_menu == 'nuestros-quesos' %}
                     <span class="menu-nav menu-nav-highlight">
                         Nuestros Quesos
@@ -124,7 +130,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'ensaladas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'ensaladas' %}">
                     {% if parte_menu == 'ensaladas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Ensaladas
@@ -135,7 +141,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'tacos' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'tacos' %}">
                     {% if parte_menu == 'tacos' %}
                     <span class="menu-nav menu-nav-highlight">
                         Tacos
@@ -146,7 +152,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'bebidas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'bebidas' %}">
                     {% if parte_menu == 'bebidas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Bebidas
@@ -157,7 +163,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'hamburguesas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'hamburguesas' %}">
                     {% if parte_menu == 'hamburguesas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Hamburguesas
@@ -168,7 +174,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'lo-caliente' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'lo-caliente' %}">
                     {% if parte_menu == 'lo-caliente' %}
                     <span class="menu-nav menu-nav-highlight">
                         Lo Caliente
@@ -179,7 +185,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'tortas' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'tortas' %}">
                     {% if parte_menu == 'tortas' %}
                     <span class="menu-nav menu-nav-highlight">
                         Tortas
@@ -190,7 +196,7 @@
                     </span>
                     {% endif %}
                 </a>
-                <a href="{% url 'sucursal' 'postres' %}">
+                <a href="{% url 'sucursal' sucursal.idsucursal 'postres' %}">
                     {% if parte_menu == 'postres' %}
                     <span class="menu-nav menu-nav-highlight">
                         Postres
@@ -205,64 +211,26 @@
             <div id="menu">
                 <h2 id="menu-titulo">{{ parte_menu_titulo }}</h2>
                 <div>
+                    {% for producto in productos %}
                     <article class="caja">
                         <div class="caja-contenido">
                             <h3 class="platillo-info">
                                 <span class="platillo-nombre">
-                                        Ensalada
+                                    {{ producto.nombre }}
                                 </span>
                             </h3>
                             <h4>
                                 <span class="platillo-descripcion">
-                                    Rica combinación de Pastos sobre una fresca cama de Lechuga,
-                                    Zanahoria y Jitomate, con tortilla en Juliana y aderezo de
-                                    la casa.
+                                    Descripción
                                 </span>
                                 <span class="platillo-precio">
-                                    $149.00
+                                    ${{ producto.precio }}
                                 </span>
                             </h4>
                         </div>
                         <img src="{% static 'inicio/img/sucursal.jpg' %}">
                     </article>
-                    <article class="caja">
-                        <div class="caja-contenido">
-                            <h3 class="platillo-info">
-                                <span class="platillo-nombre">
-                                        Pozole Rojo o Blanco
-                                </span>
-                            </h3>
-                            <h4>
-                                <span class="platillo-descripcion">
-                                    De Pastor de Pollo o Cerdo
-                                </span>
-                                <span class="platillo-precio">
-                                    $169.00
-                                </span>
-                            </h4>
-                        </div>
-                        <img src="{% static 'inicio/img/sucursal.jpg' %}">
-                    </article>
-                    <article class="caja">
-                        <div class="caja-contenido">
-                            <h3 class="platillo-info">
-                                <span class="platillo-nombre">
-                                        Ensalada
-                                </span>
-                            </h3>
-                            <h4>
-                                <span class="platillo-descripcion">
-                                    Rica combinación de Pastos sobre una fresca cama de Lechuga,
-                                    Zanahoria y Jitomate, con tortilla en Juliana y aderezo de
-                                    la casa.
-                                </span>
-                                <span class="platillo-precio">
-                                    $149.00
-                                </span>
-                            </h4>
-                        </div>
-                        <img src="{% static 'inicio/img/sucursal.jpg' %}">
-                    </article>
+                    {% endfor %}
                 </div>
             </div>
             <footer>
