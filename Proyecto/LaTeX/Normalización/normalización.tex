@@ -166,7 +166,7 @@ Con todo esto, obtuvimos el mismo resultado porque ya estaba en \textit{primera 
 \begin{itemize}
 \item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
 \item \footnotesize{\textbf{Contener}(\underline{numPedido},\underline{idProducto},cantidad)}
 \item \footnotesize{\textbf{Dirigir}(\underline{taquiClave},\underline{idSucursal},fechaInicio)}
@@ -180,7 +180,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria,descripcion)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,taquegoria,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
@@ -424,7 +424,6 @@ Se cumple que todo atributo no llave de la relación está determinado funcional
 \begin{itemize}
 \item idProducto $\rightarrow$ idProducto
 
-\item idProducto $\rightarrow$ puntosOtorgar
 \item idProducto $\rightarrow$ nombre
 \item idProducto $\rightarrow$ precio
 \item idProducto $\rightarrow$ descripcion
@@ -609,7 +608,7 @@ Notemos que nuevamente no tuvimos que efectuar cambios en el modelo: estaba ya e
 \begin{itemize}
 \item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
 \item \footnotesize{\textbf{Contener}(\underline{numPedido},\underline{idProducto},cantidad)}
 \item \footnotesize{\textbf{Dirigir}(\underline{taquiClave},\underline{idSucursal},fechaInicio)}
@@ -623,7 +622,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,taquegoria)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
@@ -821,8 +820,8 @@ Entonces, por ser trivial no es candidata a ser violación y ya está en BCNF. E
 \item \textbf{Producto}: Contamos con las DFs no triviales:
 
 \begin{itemize}
-\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, descripcion.\\Se tiene que $idProducto^+=\{idProducto,puntosOtorgar, nombre, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
-\item nombre $\rightarrow$ puntosOtorgar, idProducto, precio, descripcion.\\Se tiene que $nombre^+=\{nombre,puntosOtorgar, idProducto, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
+\item idProducto $\rightarrow$ nombre, precio, descripcion.\\Se tiene que $idProducto^+=\{idProducto, nombre, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
+\item nombre $\rightarrow$ idProducto, precio, descripcion.\\Se tiene que $nombre^+=\{nombre, idProducto, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
 \end{itemize}
 
 Entonces ya estaba en BCNF.
@@ -940,7 +939,7 @@ Entonces, en resumidas cuentas contamos con las siguientes relaciones luego de l
 \begin{itemize}
 \item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
 \item \footnotesize{\textbf{Contener}(\underline{numPedido},\underline{idProducto},cantidad)}
 \item {\footnotesize \textbf{CPEdoCliente}(\underline{CP}, estado)}
@@ -960,7 +959,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal},preparado,entregado)}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
@@ -1204,8 +1203,8 @@ Al ser trivial, se sigue directamente que no es candidata a ser violación a la 
 
 %%
 
-\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, descripcion. Es el lado izquierdo una superllave, pues $idProducto^+=\{idProducto,puntosOtorgar,\\nombre, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
-\item  nombre $\rightarrow$ puntosOtorgar, idProducto, precio, descripcion. Es el lado izquierdo una superllave, pues $nombre^+=\{nombre,puntosOtorgar,\\ idProducto, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
+\item idProducto $\rightarrow$ nombre, precio, descripcion. Es el lado izquierdo una superllave, pues $idProducto^+=\{idProducto,\\nombre, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
+\item  nombre $\rightarrow$  idProducto, precio, descripcion. Es el lado izquierdo una superllave, pues $nombre^+=\{nombre,\\ idProducto, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
 \end{itemize}
 
 
@@ -1356,7 +1355,7 @@ Entonces, en resumidas cuentas contamos con las siguientes relaciones luego de l
 \begin{itemize}
 \item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoría)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
 \item \footnotesize{\textbf{Contener}(\underline{numPedido},\underline{idProducto},cantidad)}
 \item {\footnotesize \textbf{CPEdoCliente}(\underline{CP}, estado)}
@@ -1376,7 +1375,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal},preparado,entregado)}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}

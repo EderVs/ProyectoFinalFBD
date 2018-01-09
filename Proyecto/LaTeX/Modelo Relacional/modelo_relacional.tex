@@ -142,7 +142,7 @@ Luego, para traducir la jerarquía de especialización que se presenta con la su
 
 \begin{itemize}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Empleado}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
 numInterior,numExterior,CP,CURP,RFC,tipo,tipoSangre,fechaNac,fechaContratacion,numEmergencia)}
 \end{itemize}
@@ -150,7 +150,7 @@ numInterior,numExterior,CP,CURP,RFC,tipo,tipoSangre,fechaNac,fechaContratacion,n
 Notemos que en el caso de la especialización de la super-entidad \textbf{Producto} y su sub-entidad \textbf{Salsa}, al no haber propiamente una restricción de disyunción (podría verse como cualquiera según conviniera) y tener una completez parcial, fue necesario crear una relación para ambas entidades del diagrama entidad-relación como sigue:
 
 \begin{itemize}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,descripcion)}
 \item \footnotesize{\textbf{Salsa}(\underline{idProducto},scoville,presentacion)}
 \end{itemize}
 
@@ -257,7 +257,7 @@ A raíz de lo expuesto a priori, obtuvimos las siguientes relaciones (tablas) qu
 \begin{itemize}
 \item \footnotesize{\textbf{Categoría}(\underline{idProducto},\underline{taquegoria})}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
-numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
+numInterior,numExterior,CP,numPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
 \item \footnotesize{\textbf{Contener}(\underline{numPedido},\underline{idProducto},cantidad)}
 \item \footnotesize{\textbf{Dirigir}(\underline{taquiClave},\underline{idSucursal},fechaInicio)}
@@ -271,7 +271,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},nombre,precio,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
