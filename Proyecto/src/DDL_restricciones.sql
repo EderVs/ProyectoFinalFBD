@@ -17,7 +17,10 @@
 --                     directamente en el archivo DDL_creación.sql  
 ##########################################################################
 
-
+/**
+  * INTEGRIDADES DE ENTIDAD DE LLAVES PRIMARIAS.
+  * Estableciendo las llaves primarias simples y compuestas de las tablas.
+*/
 ALTER TABLE Categoria ADD CONSTRAINT pk_categoria PRIMARY KEY(idProducto);
 ALTER TABLE Cliente ADD CONSTRAINT pk_taquiClave_c PRIMARY KEY(taquiClave);
 ALTER TABLE Conservar ADD CONSTRAINT pk_ProdHist PRIMARY KEY(idProducto,idHistorico);
@@ -51,6 +54,12 @@ ALTER TABLE TacoRider ADD CONSTRAINT pk_taquiClave_tr PRIMARY KEY(taquiClave);
 ALTER TABLE Tener ADD CONSTRAINT pk_idProdidIng PRIMARY KEY(idProducto,idIngrediente);
 ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
 
+/**
+  * INTEGRIDADES DE ENTIDAD DE LLAVES FORÉNEAS.
+  * Estableciendo las restricciones de llaves externas para lograr la conexión entre las tablas.
+  * Estamos asegurando la integridad referencial al usar casada porque al eliminar un registro de una tabla
+  * referenciada, se borran también en las tablas rerenciantes.
+*/
 ALTER TABLE Categoria ADD CONSTRAINT fk_idProducto_cat FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idProducto_cons FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idHistorico FOREIGN KEY(idHistorico) REFERENCES Historico(idHistorico) ON DELETE CASCADE;
@@ -82,6 +91,10 @@ ALTER TABLE TacoRider ADD CONSTRAINT fk_taquiClave_tr FOREIGN KEY(taquiClave) RE
 ALTER TABLE Tener ADD CONSTRAINT fk_idProducto_ten FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente) REFERENCES Ingrediente(idIngrediente) ON DELETE CASCADE;
 
+/**
+  * INTEGRIDADES DE DOMINIO: UNICIDAD y CHECKS. No incluimos en la base de datos valores nulos que pueden 
+  * prestarse a diversas interpretaciones como son datos que no aplican, valores desconocidos, entre otros.
+*/
 -- Checks:
 ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
 ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
