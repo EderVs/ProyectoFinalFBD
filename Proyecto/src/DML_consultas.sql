@@ -239,7 +239,7 @@ FROM (SELECT taquiClave, idProducto, fechaPedido, metodoPago, taquegoria
       Cliente b ON a.taquiClave = b.taquiClave; --Hacemos el join con la tabla Cliente para tener el resto de su información.
 
 /**
-  * 14. Los pedidos que fueron realizados en el mes de marzo u octubre del año 2010
+  * 14. Los pedidos que fueron realizados entre el mes de marzo y octubre del año 2010
   * y que contienen algún producto que pertenece a la categoría de 'Entradas', pero que no
   * tiene ningún producto de la categoría de 'Postres'. Requerimos también los datos importantes
   * del cliente que efectuó el pedido.
@@ -248,13 +248,13 @@ SELECT *
 (SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, telefono, numPedido --Los pedidos que tienen algún producto que es entrada.
 FROM Cliente NATURAL JOIN Pedido NATURAL JOIN Contener NATURAL JOIN Producto NATURAL JOIN Categoria
 WHERE taquegoria = 'ENTRADAS' AND
-      EXTRACT(month from fechaPedido) IN (3,10) AND 
+      (EXTRACT(month from fechaPedido) BETWEEN 3 AND 10) AND 
       EXTRACT(year from fechaPedido) = 2010)
 LEFT OUTER JOIN  --Nos quedamos con los que no tienen
 (SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, telefono, numPedido --Aquellos pedidos con algún producto que es un postre.
 FROM Cliente NATURAL JOIN Pedido NATURAL JOIN Contener NATURAL JOIN Producto NATURAL JOIN Categoria
 WHERE taquegoria = 'POSTRES' AND
-      EXTRACT(month from fechaPedido) IN (3,10) AND 
+      (EXTRACT(month from fechaPedido) BETWEEN 3 AND 10) AND 
       EXTRACT(year from fechaPedido) = 2010);
 
 /**
