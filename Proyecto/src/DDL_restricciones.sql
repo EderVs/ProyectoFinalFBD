@@ -21,6 +21,7 @@
   * INTEGRIDADES DE ENTIDAD DE LLAVES PRIMARIAS.
   * Estableciendo las llaves primarias simples y compuestas de las tablas.
  */
+ALTER TABLE Categoria ADD CONSTRAINT pk_categoria PRIMARY KEY(idProducto);
 ALTER TABLE Cliente ADD CONSTRAINT pk_taquiClave_c PRIMARY KEY(taquiClave);
 ALTER TABLE Conservar ADD CONSTRAINT pk_ProdHist PRIMARY KEY(idProducto,idHistorico);
 ALTER TABLE Contener ADD CONSTRAINT pk_numPedidProd PRIMARY KEY(numPedido,idProducto);
@@ -59,6 +60,7 @@ ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
   * Estamos asegurando la integridad referencial al usar casada porque al eliminar un registro de una tabla
   * referenciada, se borran también en las tablas rerenciantes.
  */
+ALTER TABLE Categoria ADD CONSTRAINT fk_idProducto_cat FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idProducto_cons FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idHistorico FOREIGN KEY(idHistorico) REFERENCES Historico(idHistorico) ON DELETE CASCADE;
 ALTER TABLE Contener ADD CONSTRAINT fk_idnumPedido FOREIGN KEY(numPedido) REFERENCES Pedido(numPedido) ON DELETE CASCADE;
@@ -94,6 +96,8 @@ ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente)
   * prestarse a diversas interpretaciones como son datos que no aplican, valores desconocidos, entre otros.
  */
  -- Checks:
+ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
+
 ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
 ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK (cantidad >= 0); --No puede tener un pedido una cantidad negativa de productos.
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
@@ -105,15 +109,17 @@ ALTER TABLE Historico ADD CONSTRAINT ch_precio_nuevh CHECK (precioNuevo >= 0); -
 ALTER TABLE Ingrediente ADD CONSTRAINT ch_cantidadExistencia CHECK (cantidadExistencia >= 0); --No puede faltar negativamente.
 ALTER TABLE Mobiliario ADD CONSTRAINT ch_tipo CHECK (tipo IN ('MESA','SILLA','BANCO','PLATO','SERVILLETERO')); --Los tipos de mueble especificados en el caso de uso.
 ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DEBITO','TARJETA CREDITO','CRYPTOCURRENCY','VALES'));
+ALTER TABLE Pedido ADD CONSTRAINT ch_preparado CHECK (preparado IN (0,1)); --Valores booleanos.
+ALTER TABLE Pedido ADD CONSTRAINT ch_entregado CHECK (entregado IN (0,1)); --Valores booleanos.
 ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
 ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
-ALTER TABLE Producto ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
 ALTER TABLE ProductoLeyenda ADD CONSTRAINT ch_ley CHECK (leyenda IN ('VEGANO','ESPECIAL','ORGANICO','DELUXE','RECOMENDACION','LIGHT','HOT')); --No puede tener un producto una cantidad negativa de un ingrediente.
 ALTER TABLE ProveerIng ADD CONSTRAINT ch_precio_ping CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.
 ALTER TABLE ProveerMob ADD CONSTRAINT ch_precio_pmob CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.
 ALTER TABLE Salsa ADD CONSTRAINT ch_scoville  CHECK (scoville IN ('DULCE','BAJO','MEDIO','ALTO','EXTREMO'));
 ALTER TABLE Salsa ADD CONSTRAINT ch_psalsa CHECK (presentacion IN ('300ml', '500ml', '1L', '2L')); --No puede tener un producto una cantidad negativa de un ingrediente.
 ALTER TABLE Sucursal ADD CONSTRAINT ch_horario CHECK (horaApertura < horaCierre);
+ALTER TABLE TacoRider ADD CONSTRAINT ch_dispo CHECK (estaDisponible IN (0,1)); --Valores booleanos.
 ALTER TABLE Tener ADD CONSTRAINT ch_cantidad_ten CHECK (cantidad >= 0); --No puede tener un producto una cantidad negativa de un ingrediente.
 ALTER TABLE Transporte ADD CONSTRAINT ch_tipo_tr  CHECK (tipo IN ('BICICLETA','MOTOCICLETA'));
 -- Unicidad:
@@ -121,3 +127,4 @@ ALTER TABLE Cliente ADD CONSTRAINT unq_email_cl UNIQUE (email); --Hay una direcc
 ALTER TABLE Empleado ADD CONSTRAINT unq_email_emp UNIQUE (email); --Hay una dirección de correo electrónico para cada empleado; no coinciden.
 ALTER TABLE Proveedor ADD CONSTRAINT unq_razonSocial_prov UNIQUE (razonSocial); --No puede haber legalmente dos proveedores con la misma razón social. 
 ALTER TABLE Proveedor ADD CONSTRAINT unq_email_prov UNIQUE (email); --Hay una direccón de correo electrónico para cada proveedor; no coinciden.
+ALTER TABLE Producto ADD CONSTRAINT unq_nombre_prod (nombre); --Hay un nombre único para cada producto de la taquería.

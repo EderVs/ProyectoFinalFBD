@@ -21,6 +21,12 @@
 --                     al especificar que no son aceptador al ser sujetos
 --                     a potenciales ambigüedades.
 ##########################################################################
+
+CREATE TABLE Categoria(
+        idProducto INTEGER NOT NULL,
+        taquegoria VARCHAR2(200) NOT NULL
+);
+
 CREATE TABLE Cliente(
         taquiClave INTEGER NOT NULL,
         email VARCHAR2(50) NOT NULL,
@@ -144,7 +150,9 @@ CREATE TABLE Pedido(
         idSucursal INTEGER NOT NULL,
         fechaPedido DATE NOT NULL,
         taquiClave INTEGER NOT NULL,
-        metodoPago VARCHAR2(50) NOT NULL
+        metodoPago VARCHAR2(50) NOT NULL,
+        preparado NUMBER(1) NOT NULL,
+        entregado NUMBER(1) NOT NULL,
 );
 
 CREATE TABLE Poseer(
@@ -155,9 +163,9 @@ CREATE TABLE Poseer(
 CREATE TABLE Producto(
         idProducto INTEGER NOT NULL,
         puntosOtorgar INTEGER NOT NULL,
-        nombre varchar2(70) NOT NULL,
+        nombre varchar2(200) NOT NULL,
         precio FLOAT(2) NOT NULL,
-        taquegoria VARCHAR2(50) NOT NULL
+        descripcion VARCHAR2(200) NOT NULL
 );
 
 CREATE TABLE ProductoLeyenda(

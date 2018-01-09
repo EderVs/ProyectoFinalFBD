@@ -125,6 +125,7 @@ Por otro lado, tal como se ilustra en el ejemplo de la práctica actual, tambié
 Vamos a revisar cada tabla (relación) del modelo previo para verificar si ya se encuentra o no en la forma normal de interés actualmente:
 
 \begin{itemize}
+\item \textbf{Categoría}: Los atributos de la tabla ya poseen dominios atómicos, es decir, que no pueden ser separados en dominios más pequeños. En consecuencia, ya se encuentra en \textit{primera forma normal}.
 \item \textbf{Cliente}: Los atributos que eran susceptibles de tener dominios no atómicos ya están separados, como es el caso de todos los datos correspondientes a la dirección del cliente y los de su nombre. Además, la fecha no necesita ser separada en día, mes y año porque el manejador de la base de datos puede trabajar sobre el tipo \textit{DATE} que contempla los tres campos mencionados. Por ende, ya se encuentra en \textit{primera forma normal}.
 \item \textbf{Conservar}: Como es una relación que hace referencia a atributos llave de otras relaciones cuyos dominios no pueden ser separados (son llaves foráneas), entonces la relación ya está en \textit{primera forma normal}.
 \item \textbf{Contener}: Ocurre exactamente lo mismo que en el caso previo al hacer referencia a llaves atómicas de otras tablas. En cuento al atributo \textit{cantidad}, es ya atómico al ser un entero. Por tanto, la relación (tabla) se encuentra ya en \textit{primera forma normal}.
@@ -163,6 +164,7 @@ Con todo esto, obtuvimos el mismo resultado porque ya estaba en \textit{primera 
 
 \subsection{Relaciones Generadas}
 \begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
 numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
@@ -176,9 +178,9 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Licencia}(\underline{codigo},\underline{taquiClave}})
 \item \footnotesize{\textbf{Llevar}(\underline{numPedido},\underline{taquiClave})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
@@ -216,25 +218,36 @@ A partir de este punto, comenzaremos a usar las dependencias funcionales de las 
 De acuerdo con la teoría, una relación estará en \textit{segunda forma normal} en caso de que todo atributo no llave depende del atributo llave de la relación. En los casos en que esto regla no se cumpla para algún atributo de la relación, lo que suele hacerse es separar la información que se encuentra determinada funcionalmente por un atributo que no es llave primaria. A continuación, consideremos las dependencias funcionales de nuestras relaciones en \textit{primera forma normal} y a partir de ello evaluaremos si están o no en \textit{segunda forma normal}. En caso de presentarse violaciones, procederemos a normalizar.
 
 \begin{itemize}
+
+\item \textbf{Categoría}: Tenemos las dependencias funcionales que siguen:
+
+\begin{itemize}
+\item idProducto $\rightarrow$ idProducto
+
+\item idProducto $\rightarrow$ taquegoría
+\end{itemize}
+
+Evidentemente todo atributo no llave (en este caso la llave débil o discriminante de \textit{taquegoría}) depende funcionalmente de la llave de la tabla, que en este caso es \textit{idProducto}. Por ende, ya se encuentra normalizada a \textit{segunda forma normal}. 
+
 \item \textbf{Cliente}: Tenemos las dependencias funcionales que siguen:
 
 \begin{itemize}
-\item taquiClave $\rightarrow$ taquiClave\\
+\item taquiClave $\rightarrow$ taquiClave
 
-\item taquiClave $\rightarrow$ email\\
-\item taquiClave $\rightarrow$ telefono\\
-\item taquiClave $\rightarrow$ nombre\\
-\item taquiClave $\rightarrow$ apellidoPaterno\\
-\item taquiClave $\rightarrow$ apellidoMaterno\\
-\item taquiClave $\rightarrow$ municipio\\
-\item taquiClave $\rightarrow$ colonia\\
-\item taquiClave $\rightarrow$ calle\\
-\item taquiClave $\rightarrow$ CP\\
-\item taquiClave $\rightarrow$ numInterior\\
-\item taquiClave $\rightarrow$ numExterior\\
-\item taquiClave $\rightarrow$ estado\\
-\item taquiClave $\rightarrow$ fechaPrimerVisita\\
-\item taquiClave $\rightarrow$ numPuntos\\
+\item taquiClave $\rightarrow$ email
+\item taquiClave $\rightarrow$ telefono
+\item taquiClave $\rightarrow$ nombre
+\item taquiClave $\rightarrow$ apellidoPaterno
+\item taquiClave $\rightarrow$ apellidoMaterno
+\item taquiClave $\rightarrow$ municipio
+\item taquiClave $\rightarrow$ colonia
+\item taquiClave $\rightarrow$ calle
+\item taquiClave $\rightarrow$ CP
+\item taquiClave $\rightarrow$ numInterior
+\item taquiClave $\rightarrow$ numExterior
+\item taquiClave $\rightarrow$ estado
+\item taquiClave $\rightarrow$ fechaPrimerVisita
+\item taquiClave $\rightarrow$ numPuntos
 \item CP $\rightarrow$ estado
 \end{itemize}
 
@@ -387,6 +400,8 @@ Todo atributo no llave depende funcionalmente de la llave. Por ende, está ya en
 \item numPedido $\rightarrow$ taquiClave
 \item numPedido $\rightarrow$ metodoPago
 \item numPedido $\rightarrow$ promocion
+\item numPedido $\rightarrow$ preparado
+\item numPedido $\rightarrow$ entregado
 \item fechaPedido $\rightarrow$ promocion
 \end{itemize}
 
@@ -412,14 +427,13 @@ Se cumple que todo atributo no llave de la relación está determinado funcional
 \item idProducto $\rightarrow$ puntosOtorgar
 \item idProducto $\rightarrow$ nombre
 \item idProducto $\rightarrow$ precio
-\item idProducto $\rightarrow$ taquegoria
-
+\item idProducto $\rightarrow$ descripcion
 \item nombre $\rightarrow$ nombre
 
 \item nombre $\rightarrow$ idProducto
 \item nombre $\rightarrow$ nombre
 \item nombre $\rightarrow$ precio
-\item nombre $\rightarrow$ taquegoria
+\item nombre $\rightarrow$ descripcion
 
 \end{itemize}
 
@@ -593,6 +607,7 @@ Notemos que nuevamente no tuvimos que efectuar cambios en el modelo: estaba ya e
 \subsection{Relaciones Generadas}
 
 \begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
 numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
@@ -606,7 +621,7 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Licencia}(\underline{codigo},\underline{taquiClave}})
 \item \footnotesize{\textbf{Llevar}(\underline{numPedido},\underline{taquiClave})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
 \item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
@@ -656,6 +671,15 @@ tenemos que una relación $R$ está en $BCNF$ si y sólo si en toda DF no trivia
 Normalicemos a partir de esto las tablas cuando sea necesario, considerando las DFs no triviales que pueden, potencialmente, violar la forma normal\footnote{Separaremos con comas (,) los determinados y determinantes para tener mayor claridad, aunque no son necesarias y bien pudimos usar espacios como en la normalización a segunda forma normal.}.
 
 \begin{itemize}
+
+\item \textbf{Categoría}:
+\begin{itemize}
+\item idProducto $\rightarrow$ taquegoría. Como tenemos que $idProducto^+=\{idProducto,taquegoria\}$, entonces el lado izquierdo es superllave y no hay violación a la forma normal. \checkmark
+\end{itemize}
+
+Entonces ya estaba en \textit{BCNF}.
+
+
 \item \textbf{Cliente}:  Tenemos las DFs:
 
 \begin{itemize}
@@ -767,7 +791,7 @@ Entonces, por ser trivial no es candidata a ser violación y ya está en BCNF. E
 \item \textbf{Pedido}: Tenemos las DFs:
 
 \begin{itemize}
-\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion. \\\\Entonces ocurre que $numPedido^+ = \{numPedido,idSucursal, fechaPedido, taquiClave,\\ metodoPago, promocion\}$, así que es superllave y no hay violación \checkmark
+\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion,preparado,entregado. \\\\Entonces ocurre que $numPedido^+ = \{numPedido,idSucursal, fechaPedido, taquiClave,\\ metodoPago, promocion,preparado,entregado\}$, así que es superllave y no hay violación \checkmark
 \item fechaPedido $\rightarrow$ promocion. \\\\
 
 Entonces ocurre que $fechaPedido^+ = \{fechaPedido,promocion\}$. Hay violación ya que no cumple con alcanzar el resto de los atributos y por ende no es superllave. \ding{55}
@@ -780,9 +804,9 @@ Tomando la violación, fraccionamos entonces en dos relaciones, ambas con el det
 \begin{itemize}
 \item fechaPedido $\rightarrow$ promocion.\\\\ Tenemos que $fechaPedido^+ = \{fechaPedido,promocion\}$. Entonces, el lado izquierdo es superllave y ya no hay violación \checkmark
 \end{itemize}
-\item {\footnotesize \textbf{Pedido}(\underline{numPedido}, idSucursal, fechaPedido, taquiClave, metodoPago} con:
+\item {\footnotesize \textbf{Pedido}(\underline{numPedido}, idSucursal, fechaPedido, taquiClave, metodoPago,preparado,entregado}) con:
 \begin{itemize}
-\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago\\\\Como ocurre que $numPedido^+=\{idSucursal, fechaPedido, taquiClave, metodoPago\}$, entonces el lado izquierdo es superllave y no hay violación. \checkmark
+\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago,entregado,preparado\\\\Como ocurre que $numPedido^+=\{idSucursal, fechaPedido, taquiClave, metodoPago,\\preparado,entregado\}$, entonces el lado izquierdo es superllave y no hay violación. \checkmark
 \end{itemize}
 \end{itemize}
 
@@ -797,8 +821,8 @@ Entonces, por ser trivial no es candidata a ser violación y ya está en BCNF. E
 \item \textbf{Producto}: Contamos con las DFs no triviales:
 
 \begin{itemize}
-\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, taquegoria.\\Se tiene que $idProducto^+=\{idProducto,puntosOtorgar, nombre, precio, taquegoria\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
-\item nombre $\rightarrow$ puntosOtorgar, idProducto, precio, taquegoria.\\Se tiene que $nombre^+=\{nombre,puntosOtorgar, idProducto, precio, taquegoria\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
+\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, descripcion.\\Se tiene que $idProducto^+=\{idProducto,puntosOtorgar, nombre, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
+\item nombre $\rightarrow$ puntosOtorgar, idProducto, precio, descripcion.\\Se tiene que $nombre^+=\{nombre,puntosOtorgar, idProducto, precio, descripcion\}$, así que el lado izquierdo es superllave y no es violación a la forma normal. \checkmark
 \end{itemize}
 
 Entonces ya estaba en BCNF.
@@ -914,6 +938,7 @@ Entonces, por ser trivial no es candidata a ser violación y ya está en BCNF. E
 Entonces, en resumidas cuentas contamos con las siguientes relaciones luego de la normalización a BCNF obtenemos:
 
 \begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoria)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,
 numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
@@ -933,9 +958,9 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Licencia}(\underline{codigo},\underline{taquiClave}})
 \item \footnotesize{\textbf{Llevar}(\underline{numPedido},\underline{taquiClave})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal},preparado,entregado)}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
@@ -985,6 +1010,15 @@ Para poder normalizar, debemos seguir el siguiente algoritmo de síntesis revisa
 \end{enumerate}
 
 \begin{itemize}
+\item \textbf{Categoría}: La única dependencia funcional no trivial es:
+
+\begin{itemize}
+\item idProducto $\rightarrow$ taquegoría. Como tenemos que $idProducto^+=\{idProducto,taquegoria\}$, entonces el lado izquierdo es superllave y no hay violación a la forma normal.
+\end{itemize}
+
+Entonces ya estaba en \textit{tercera forma normal}.
+
+
 \item \textbf{Cliente}: Tenemos las dependencias funcionales no triviales que constituyen el conjunto $F$ son las que siguen:
 
 \begin{itemize}
@@ -1132,24 +1166,24 @@ Como se cumple una de las dos condiciones, no constituye una violación a la for
 \item \textbf{Pedido}: Las DFs no triviales que forman parte del conjunto $F$ son:
 
 \begin{itemize}
-\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion. Tenemos que $numPedido^+=\{numPedido,idSucursal, fechaPedido,\\ taquiClave, metodoPago, promocion\}$, por lo que es superllave el lado izquierdo y no es una violación a la 3NF.
+\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago, promocion,preparado,entregado. Tenemos que $numPedido^+=\{numPedido,idSucursal, fechaPedido,\\ taquiClave, metodoPago, promocion,preparado,entregado\}$, por lo que es superllave el lado izquierdo y no es una violación a la 3NF.
 \item fechaPedido $\rightarrow$ promocion. El lado izquierdo no es una superllave y además el lado derecho no forma parte de una llave candidata porque ya vimos antes que una llave de la relación está conformada por un único atributo y además $promocion^+=\{promocion\}$. Entonces, es una violación a la forma normal.
 \end{itemize}
 
-Comenzamos entonces encontrando el conjunto $F$ mínimo. Solamente puede haber atributos superfluos por la derecha a partir de la primera DF. Es sencillo ver que idSucursal, fechaPedido, taquiClave, metodoPago no son atributos superfluos por la derecha, pues al tratar de obtener la cerradura $numPedido^+$ con las DFs que quedan de quitarlos, es imposible alcanzarlos con als DFs resultantes de $F'$. Por otro lado, es posible alcanzar \textit{promocion} al quitarlo de la primera DF porque en la segunda tenemos que fechaPedido $\rightarrow$ promocion. Por ende, \textit{promocion} es un atributo superfluo por la derecha.\\
+Comenzamos entonces encontrando el conjunto $F$ mínimo. Solamente puede haber atributos superfluos por la derecha a partir de la primera DF. Es sencillo ver que idSucursal, fechaPedido, taquiClave, metodoPago,entregado y preparado no son atributos superfluos por la derecha, pues al tratar de obtener la cerradura $numPedido^+$ con las DFs que quedan de quitarlos, es imposible alcanzarlos con als DFs resultantes de $F'$. Por otro lado, es posible alcanzar \textit{promocion} al quitarlo de la primera DF porque en la segunda tenemos que fechaPedido $\rightarrow$ promocion. Por ende, \textit{promocion} es un atributo superfluo por la derecha.\\
 
 Obtenemos entonces que el conjunto $F$ mínimo está constituido por:
 
 
 \begin{itemize}
-\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago
+\item numPedido $\rightarrow$ idSucursal, fechaPedido, taquiClave, metodoPago,preparado,entregado
 \item fechaPedido $\rightarrow$ promocion.
 \end{itemize}
 
 Creamos luego esquemas con los atributos de estas DFs:
 
 \begin{itemize}
-\item {\footnotesize \textbf{Pedido}(\underline{numPedido},idSucursal, fechaPedido, taquiClave, metodoPago)}
+\item {\footnotesize \textbf{Pedido}(\underline{numPedido},idSucursal, fechaPedido, taquiClave, metodoPago,preparado,entregado)}
 \item {\footnotesize \textbf{FechaPedPromo}(\underline{fechaPedido},promocion)}
 \end{itemize}
 
@@ -1170,8 +1204,8 @@ Al ser trivial, se sigue directamente que no es candidata a ser violación a la 
 
 %%
 
-\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, taquegoria. Es el lado izquierdo una superllave, pues $idProducto^+=\{idProducto,puntosOtorgar,\\nombre, precio, taquegoria\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
-\item  nombre $\rightarrow$ puntosOtorgar, idProducto, precio, taquegoria. Es el lado izquierdo una superllave, pues $nombre^+=\{nombre,puntosOtorgar,\\ idProducto, precio, taquegoria\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
+\item idProducto $\rightarrow$ puntosOtorgar, nombre, precio, descripcion. Es el lado izquierdo una superllave, pues $idProducto^+=\{idProducto,puntosOtorgar,\\nombre, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
+\item  nombre $\rightarrow$ puntosOtorgar, idProducto, precio, descripcion. Es el lado izquierdo una superllave, pues $nombre^+=\{nombre,puntosOtorgar,\\ idProducto, precio, descripcion\}$. Entonces cumple con la primer posibilidad para no constituir una violación.
 \end{itemize}
 
 
@@ -1320,6 +1354,7 @@ Vemos que el modelo nos quedó exactamente como estaba en la forma normal de Boy
 Entonces, en resumidas cuentas contamos con las siguientes relaciones luego de la normalización a 3NF obtenemos:
 
 \begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},taquegoría)}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,
 numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
@@ -1339,9 +1374,9 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Licencia}(\underline{codigo},\underline{taquiClave}})
 \item \footnotesize{\textbf{Llevar}(\underline{numPedido},\underline{taquiClave})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,\underline{taquiClave},metodoPago,\underline{idSucursal},preparado,entregado)}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
 \item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
