@@ -130,8 +130,8 @@ De acuerdo con el algoritmo, nos ocupamos primero de las entidades fuertes, para
 \item \footnotesize{\textbf{SucursalTelefono}(\underline{idSucursal},\underline{telefono})}
 \item \footnotesize{\textbf{Historico}(\underline{idHistorico},idProducto,precioPrevio,precioNuevo,fechaActualizacion)}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion)}
-\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado)}
+\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \footnotesize{\textbf{Ingrediente}(\underline{idIngrediente},nombre,marca,cantidadExistencia,fechaCaducidad)}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
 \item \footnotesize{\textbf{Transporte}(\underline{idTransporte},marca,modelo,tipo)}
@@ -150,7 +150,7 @@ numInterior,numExterior,CP,CURP,RFC,tipo,tipoSangre,fechaNac,fechaContratacion,n
 Notemos que en el caso de la especialización de la super-entidad \textbf{Producto} y su sub-entidad \textbf{Salsa}, al no haber propiamente una restricción de disyunción (podría verse como cualquiera según conviniera) y tener una completez parcial, fue necesario crear una relación para ambas entidades del diagrama entidad-relación como sigue:
 
 \begin{itemize}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
 \item \footnotesize{\textbf{Salsa}(\underline{idProducto},scoville,presentacion)}
 \end{itemize}
 
@@ -177,7 +177,7 @@ La relación \textit{llevar} es de cardinalidad uno-muchos, pero total del lado 
 En cuanto a la relación \textit{ordenar} entre las entidades \textbf{Cliente} y \textbf{Pedido}, al contar con una restricción de cardinalidad uno-muchos, agregamos del lado de la relación correspondiente a los pedidos la llave del cliente que sería la \textit{taquiClave}, también agregando el atributo de relación \textit{metodoPago}; la actualización de la relación respectiva queda como sigue:
 
 \begin{itemize}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago)}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago)}
 \end{itemize}
 
 La relación \textit{ocurrir} ocasiona también una actualización de la relación \textbf{Pedido} porque es de cardinalidad uno-muchos y con participación total del lado de \textbf{Pedido}. En consecuencia, agregamos los atributos de la relación (que no hay) y el atributo llave de \textbf{Sucursal} que es \textit{idSucursal} y nos queda:
@@ -185,7 +185,7 @@ La relación \textit{ocurrir} ocasiona también una actualización de la relaci�
 
 
 \begin{itemize}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \end{itemize}
 
 La relación \textit{poseer} entre \textbf{TacoRider} y \textbf{Transporte} es de cardinalidad muchos-muchos, así que creamos una nueva relación (tabla) \textbf{Poseer} con las llaves de ambas entidades que queda así:
@@ -236,6 +236,14 @@ Para la relación \textit{supervisar} binaria, pero con respecto a la misma enti
 \item \footnotesize{\textbf{Supervisar}(\underline{taquiClaveGerente},\underline{taquiClaveSupervisado})}
 \end{itemize}
 
+Luego, para poder transformar la entidad débil de \textbf{Categoría}, lo que hicimos fue notar la relación binaria en la que toma papel con el \textbf{Producto}. Tomando la llave de la entidad de la cual depende, que es \textit{idProducto} del \textbf{Producto}, además de los atributos de la entidad débil ---en este caso solamente su discriminante de \textit{taquegoría}--- creamos una nueva relación (tabla) con este información y nos queda:
+
+\begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},\underline{taquegoria})}
+\end{itemize}
+
+Notamos, llegados a este punto, que no era necesario hacer la traducción de la relación de \textit{pertenecer} dado que lo que propiciaría sería agregar el discriminante de \textbf{Categoría} (\textit{taquegoría}) en la relación de \textbf{Producto}, pero esta información que empareja a los productos con sus categorías ya fue solucionado por la traducción previamente descrita. No quisimos agregar redundancia a nuestro modelo.\\
+
 Finalmente, en el caso de la relación \textit{dirigir} entre \textbf{Empleado} y \textbf{Sucursal} optamos por crear una nueva relación (tabla) con el mismo nombre, los atributos llave de ambas entidades fuertes y el atributo de la relación: \textit{fechaInicio}. Esto se debió a que la cardinalidad es uno-muchos y con una restricción de participación total del lado de la entidad \textbf{Sucursal}. Obtuvimos lo siguiente:
 
 \begin{itemize}
@@ -247,6 +255,7 @@ Finalmente, en el caso de la relación \textit{dirigir} entre \textbf{Empleado} 
 A raíz de lo expuesto a priori, obtuvimos las siguientes relaciones (tablas) que expresamos como tuplas y se encuentran ahora ordenadas alfabéticamente:
 
 \begin{itemize}
+\item \footnotesize{\textbf{Categoría}(\underline{idProducto},\underline{taquegoria})}
 \item \footnotesize{\textbf{Cliente}(\underline{taquiClave},email,telefono,nombre,apellidoPaterno,apellidoMaterno,calle,municipio,colonia,estado,
 numInterior,numExterior,CPnumPuntos,fechaPrimerVisita)}
 \item \footnotesize{\textbf{Conservar}(\underline{idHistorico},\underline{idProducto})}
@@ -260,10 +269,10 @@ numEmergencia,salario,\underline{idSucursal})}
 \item \footnotesize{\textbf{Licencia}(\underline{codigo},\underline{taquiClave}})
 \item \footnotesize{\textbf{Llevar}(\underline{numPedido},\underline{taquiClave})}
 \item \footnotesize{\textbf{Mobiliario}(\underline{idMueble},tipo)}
-\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,\underline{taquiClave},metodoPago,\underline{idSucursal})}
+\item \footnotesize{\textbf{Pedido}(\underline{numPedido},fechaPedido,promocion,preparado,entregado,\underline{taquiClave},metodoPago,\underline{idSucursal})}
 \item \footnotesize{\textbf{Poseer}(\underline{taquiClave},\underline{idTransporte})}
-\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,taquegoria)}
-\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto,leyenda})}
+\item \footnotesize{\textbf{Producto}(\underline{idProducto},puntoOtorgar,nombre,precio,descripcion)}
+\item \footnotesize{\textbf{ProductoLeyenda}(\underline{idProducto},\underline{leyenda})}
 \item \scriptsize{\textbf{Proveedor}(\underline{RFC},razonSocial,calle,municipio,colonia,estado,numInterior,numExterior,CP,email,inicioRelacion,telefono)}
 \item \footnotesize{\textbf{ProveerIng}(\underline{RFC},\underline{idIngrediente},precio)}
 \item \footnotesize{\textbf{ProveerMob}(\underline{RFC},\underline{idMueble},precio)}

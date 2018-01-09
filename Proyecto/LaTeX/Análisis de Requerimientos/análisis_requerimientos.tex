@@ -136,9 +136,10 @@ Por medio de la aplicación web ofrecida como parte del \textit{software} final,
 \item Sucursales: Los diferentes establecimientos de las taquerías \textbf{Tacoste}, con sus horarios de apertura y cierre, dirección, código postal y teléfono.
 \item Empleados: Los individuos que laboran en las distintas sucursales. Se almacenará la información de su nombre completo, dirección, RFC, CURP, tipo de sangre, fecha de Nacimiento, numero telefónico, dirección de correo electrónico, número de emergencia y su fecha de contratación. Se busca tenerlos vía nómina y otorgarles seguridad social, por lo que los datos son necesarios. Además, será importante tener el tipo de empleado en cuestión en cada caso (parrillero, mesero, taquero, cajero, tortillero o repartidor). En el caso de los repartidores ---mismos que identificaremos como \textbf{TacoRiders}.
 \item Clientes: Las personas que hacen uso de las instalaciones de cada sucursal, yendo a comer ahí o bien realizando pedidos a domicilio o encargos de salsas por medio de la aplicación en línea. Se almacenará un correo electrónico suyo, un número de teléfono, la cantidad de puntos que han generado y la fecha de su primer visita a la taquería.
-\item Productos: Las bebidas, tacos, postres, salsas y demás cosas que puedan ser compradas en la taquería o en línea por medio de la aplicación web. Se guardará información de su precio, nombre del producto, las leyendas que presenta el producto en la carta, así como la categoría (\textbf{taquegoría}) a la que pertenece cada uno (sopes, huaraches, del cazo, entradas, gringas, postres, etcétera). 
+\item Productos: Las bebidas, tacos, postres, salsas y demás cosas que puedan ser compradas en la taquería o en línea por medio de la aplicación web. Se guardará información de su precio, nombre del producto, descripción del producto y las leyendas que presenta el producto en la carta.
+\item Categoría: Se refiere a la clasificación (\textbf{taquegoría}) a la que pertenece cada uno de los productos (sopes, huaraches, del cazo, entradas, gringas, postres, etcétera). 
 \item Ingredientes: Los elementos que componen los productos vendidos. Se almacenará información acerca de la fecha de caducidad de los ingredientes, su nombre, marca y cantidad en existencia.
-\item Pedidos: Conjunto de varios productos que fueron encargados por uno o varios clientes en una sucursal particular. Se guardará información de la fecha del pedido y la promoción asociada al mismo en caso de que aplique alguna.
+\item Pedidos: Conjunto de varios productos que fueron encargados por uno o varios clientes en una sucursal particular. Se guardará información de la fecha del pedido y la promoción asociada al mismo en caso de que aplique alguna, además de comprobar si el pedido ya fue ordenado y posteriormente se hizo ya entrega de este.
 \item Mobiliario: Los enseres que están presentes físicamente en las sucursales como son las mesas, sillas, bancos, platos, servilleteros, entre otros. Se guardará información del tipo de mueble en cuestión.
 \item Proveedores: Son las compañías, empresas, personas físicas o morales que abastecen o han abastecido a las sucursales de ingredientes o mobiliario. Se almacena información correspondiente a una dirección de correo electrónico, RFC, dirección, código postal, razón social, un número telefónico y la fecha en que comenzó la relación con la taquería.
 \end{itemize}
@@ -148,6 +149,7 @@ Por medio de la aplicación web ofrecida como parte del \textit{software} final,
 \item Los clientes realizan pedidos de productos, ya sea físicamente o en línea a través de la aplicación web. Cada pedido tiene asociado el método de pago del cliente representante de la mesa (en caso de una compra física) o que efectúa la compra en línea.
 \item Los productos están contenidos en los pedidos que son ordenados por los clientes. Es importante identificar la cantidad de cada producto que está presente en cada pedido.
 \item Los productos tienen ingredientes que los componen. Análogamente, es importante identificar la cantidad de cada ingrediente que está presente en cada producto.
+\item Los productos pertenecen a una cierta categoría (taquegoría).
 \item Los proveedores abastecen ingredientes y/o mobiliario a las sucursales. Será trascendental poder llevar un registro del precio que ofrece el proveedor por esta acción.
 \item Si bien las salsas son un caso particular de los productos, ocurre que las salsas recomiendan productos en el sentido en que identifican los que mejor podrían acompañarlas en su consumo.
 \item Los pedidos se llevan a cabo en sucursales.
@@ -158,6 +160,7 @@ Por medio de la aplicación web ofrecida como parte del \textit{software} final,
 
 \item No deberá ser posible agregar dos veces el mismo cliente, producto
 o clase en el sistema, evitando así la duplicidad de los datos.
+\item Los nombres de los productos deben ser únicos.
 \item Se deberán poder agregar nuevas sucursales en el sistema, así como registrar nuevos clientes y trabajadores.
 \item Se deberá tener la posibilidad de actualizar, eliminar o añadir nuevas promociones.
 \item Será importante cumplir con las normas impuestas por el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) al manipular los datos personales de los clientes en la aplicación en línea. Dado que cabe la posibilidad de que los clientes no deseen presentar algunos de sus datos, entonces deberá ligarse a un cliente por defecto.
