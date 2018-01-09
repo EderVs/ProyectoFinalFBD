@@ -247,11 +247,15 @@ FROM (SELECT taquiClave, idProducto, fechaPedido, metodoPago, taquegoria
 SELECT *
 (SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, telefono, numPedido --Los pedidos que tienen algún producto que es entrada.
 FROM Cliente NATURAL JOIN Pedido NATURAL JOIN Contener NATURAL JOIN Producto NATURAL JOIN Categoria
-WHERE taquegoria = 'ENTRADAS')
+WHERE taquegoria = 'ENTRADAS' AND
+      EXTRACT(month from fechaPedido) IN (3,10) AND 
+      EXTRACT(year from fechaPedido) = 2010)
 LEFT OUTER JOIN  --Nos quedamos con los que no tienen
 (SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, telefono, numPedido --Aquellos pedidos con algún producto que es un postre.
 FROM Cliente NATURAL JOIN Pedido NATURAL JOIN Contener NATURAL JOIN Producto NATURAL JOIN Categoria
-WHERE taquegoria = 'POSTRES')
+WHERE taquegoria = 'POSTRES' AND
+      EXTRACT(month from fechaPedido) IN (3,10) AND 
+      EXTRACT(year from fechaPedido) = 2010);
 
 /**
   * 15. Un listado de aquellos clientes que hayan sido asiduos de la taquería por un periodo superior a los tres años,
