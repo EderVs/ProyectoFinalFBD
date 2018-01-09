@@ -1,0 +1,36 @@
+footer {
+    bottom: 0px;
+    position: absolute;
+}
+
+form {
+    display: block;
+    margin-top: 20px
+}
+
+input {
+    display: block;
+    height: 25px;
+    margin: 20px auto;
+    width: 150px;
+}
+
+#contenido {
+    display: inline-block;
+    width: 100%;
+}
+
+#login {
+    border: 1px solid #e5e5e5;
+    display: block;
+    height: 350px;
+    margin: 70px auto;
+    width: 325px;
+}
+
+#login-image {
+display: block;
+margin: 30px auto;
+    height: 100px;
+    width: 100px;
+}

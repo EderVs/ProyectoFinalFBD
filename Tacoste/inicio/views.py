@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 """ Vistas de inicio """
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 from . import utils
 from .models import Sucursal, Producto
 
 NOMBRE_APP = "inicio"
+
 
 def index(request):
     sucursales = Sucursal.objects.all()
@@ -20,6 +23,7 @@ def index(request):
         'sucursales': sucursales,
     }
     return render(request, template, context)
+
 
 def sucursal(request, sucursal_id, parte_menu):
     sucursal = get_object_or_404(Sucursal, pk=sucursal_id)
@@ -40,3 +44,25 @@ def sucursal(request, sucursal_id, parte_menu):
         'productos': productos,
     }
     return render(request, template, context)
+
+
+def loginCliente(request):
+    if request.POST:
+        email = request.POST.get('email', '')
+        password = request.POST.get('password', '')
+        if email != '' and password != '':
+            users = User.objects.filter(email=email)
+            if users.exists():
+                user = authenticate(username=users[0].username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('index')
+
+    template = NOMBRE_APP + "/login.html"
+    return render(request, template)
+
+
+def logoutCliente(request):
+    logout(request)
+    return redirect('index')
+

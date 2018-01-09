@@ -6,6 +6,36 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
+
+
+class Cliente(models.Model):
+    taquiclave = models.BigIntegerField(primary_key=True)
+    email = models.CharField(unique=True, max_length=50, blank=True, null=True)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
+    nombre = models.CharField(max_length=50, blank=True, null=True)
+    apellidopaterno = models.CharField(max_length=50, blank=True, null=True)
+    apellidomaterno = models.CharField(max_length=50, blank=True, null=True)
+    municipio = models.CharField(max_length=100, blank=True, null=True)
+    colonia = models.CharField(max_length=100, blank=True, null=True)
+    calle = models.CharField(max_length=100, blank=True, null=True)
+    cp = models.ForeignKey('Cpedosucursal', models.DO_NOTHING, db_column='cp', null=True)
+    numinterior = models.BigIntegerField(blank=True, null=True)
+    numexterior = models.BigIntegerField(blank=True, null=True)
+    fechaprimervista = models.DateField(blank=True, null=True)
+    numpuntos = models.BigIntegerField(blank=True, null=True)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+
+    class Meta:
+        managed = True
+        db_table = 'cliente'
+
+    def __str__(self):
+        return self.nombre + ' ' + self.apellidopaterno
 
 
 class Sucursal(models.Model):

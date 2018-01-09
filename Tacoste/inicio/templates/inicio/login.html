@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Tacoste</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/login.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Nunito" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                </a>
+            </div>
+        </header>
+        <div id="contenido1">
+            <div id="login">
+                <picture>
+                    <img id="login-image" src="{% static 'inicio/img/login-image.png' %}">
+                </picture>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" id="email" name="email" placeholder="Email"/>
+                    <input type="password" id="password" name="password" placeholder="Contraseña"/>
+                    <input type="submit" id="entrar" name="Entrar"/>
+                </form>
+            </div>
+            <footer>
+                <div>
+                    <picture class="logo">
+                        <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                    </picture>
+                    <div id="footer-enlaces">
+                        <span class="footer-enlaces">¿Quienes somos?</span>
+                        <span class="footer-enlaces">©2018</span>
+                        <div id="privacidad-terminos">
+                            <span class="footer-enlaces">Privacidad</span>
+                            <span class="footer-enlaces">Términos</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
