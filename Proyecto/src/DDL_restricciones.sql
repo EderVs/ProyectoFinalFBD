@@ -20,7 +20,7 @@
 /**
   * INTEGRIDADES DE ENTIDAD DE LLAVES PRIMARIAS.
   * Estableciendo las llaves primarias simples y compuestas de las tablas.
- */
+*/
 ALTER TABLE Categoria ADD CONSTRAINT pk_categoria PRIMARY KEY(idProducto);
 ALTER TABLE Cliente ADD CONSTRAINT pk_taquiClave_c PRIMARY KEY(taquiClave);
 ALTER TABLE Conservar ADD CONSTRAINT pk_ProdHist PRIMARY KEY(idProducto,idHistorico);
@@ -59,7 +59,7 @@ ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
   * Estableciendo las restricciones de llaves externas para lograr la conexión entre las tablas.
   * Estamos asegurando la integridad referencial al usar casada porque al eliminar un registro de una tabla
   * referenciada, se borran también en las tablas rerenciantes.
- */
+*/
 ALTER TABLE Categoria ADD CONSTRAINT fk_idProducto_cat FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idProducto_cons FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idHistorico FOREIGN KEY(idHistorico) REFERENCES Historico(idHistorico) ON DELETE CASCADE;
@@ -94,10 +94,9 @@ ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente)
 /**
   * INTEGRIDADES DE DOMINIO: UNICIDAD y CHECKS. No incluimos en la base de datos valores nulos que pueden 
   * prestarse a diversas interpretaciones como son datos que no aplican, valores desconocidos, entre otros.
- */
- -- Checks:
+*/
+-- Checks:
 ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
-
 ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
 ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK (cantidad >= 0); --No puede tener un pedido una cantidad negativa de productos.
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
@@ -127,4 +126,4 @@ ALTER TABLE Cliente ADD CONSTRAINT unq_email_cl UNIQUE (email); --Hay una direcc
 ALTER TABLE Empleado ADD CONSTRAINT unq_email_emp UNIQUE (email); --Hay una dirección de correo electrónico para cada empleado; no coinciden.
 ALTER TABLE Proveedor ADD CONSTRAINT unq_razonSocial_prov UNIQUE (razonSocial); --No puede haber legalmente dos proveedores con la misma razón social. 
 ALTER TABLE Proveedor ADD CONSTRAINT unq_email_prov UNIQUE (email); --Hay una direccón de correo electrónico para cada proveedor; no coinciden.
-ALTER TABLE Producto ADD CONSTRAINT unq_nombre_prod (nombre); --Hay un nombre único para cada producto de la taquería.
+ALTER TABLE Producto ADD CONSTRAINT unq_nombre_prod (nombre); --Hay un único nombre para cada producto de la taquería.
