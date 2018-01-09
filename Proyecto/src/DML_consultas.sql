@@ -20,7 +20,7 @@
 -- =============================================
 
 /**
-  * 1. Los quince productos más vendido en la taquería y su número 
+  * 1. Los quince productos más vendidos en la taquería y su número 
   * respectivo de ventas.
 */
 SELECT idProducto,nombre,taquegoria,descripcion,ventas as "Número de Ventas"
