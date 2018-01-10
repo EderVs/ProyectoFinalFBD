@@ -32,6 +32,7 @@ DROP SEQUENCE salsa_seq;
   * Borrado de procedimientos almacenados ("stored procedures").
 */
 DROP PROCEDURE elimina_caducos;  
+DROP PROCEDURE inc_sal;
 
 
 /**
