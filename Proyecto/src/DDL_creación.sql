@@ -1,4 +1,4 @@
-##########################################################################
+-- ##########################################################################
 -- Nombre            : DDL_creación.sql.
 -- Fecha             : 12 de enero del 2018.
 -- Autores           : Flores Martínez Andrés, 
@@ -20,7 +20,7 @@
 --                     Se resuelve la integridad de dominios de marca nulos
 --                     al especificar que no son aceptador al ser sujetos
 --                     a potenciales ambigüedades.
-##########################################################################
+-- ##########################################################################
 
 CREATE TABLE Categoria(
         idProducto INTEGER NOT NULL,
