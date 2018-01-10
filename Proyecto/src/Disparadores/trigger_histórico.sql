@@ -21,4 +21,5 @@ end;
 INSERT INTO PRODUCTO(IDPRODUCTO, PUNTOSOTORGAR, NOMBRE, PRECIO, TAQUEGORIA) VALUES
 (15, 38039, 'Monjectry', 5, 'QUECAS');
 select * from historico;
-select * from conservar;*/
+select * from conservar;
+*/

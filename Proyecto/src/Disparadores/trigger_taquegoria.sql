@@ -45,8 +45,6 @@ CREATE TABLE Salsa_aux(
 
 create sequence salsa_seq start with 1;
 
-drop sequence salsa_seq;
-
 create or replace trigger salsa_aux_trigger
 after insert or update on salsa
 for each row
