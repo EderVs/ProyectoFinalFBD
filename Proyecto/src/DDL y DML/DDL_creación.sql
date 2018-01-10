@@ -94,7 +94,7 @@ CREATE TABLE Dirigir(
 CREATE TABLE Empleado(
         taquiClave INTEGER NOT NULL,
         idSucursal INTEGER NOT NULL,
-        salario FLOAT(2) NOT NULL,
+        salario FLOAT NOT NULL,
         email VARCHAR2(50) NOT NULL,
         telefono VARCHAR2(20) NOT NULL,
         nombre VARCHAR2(50) NOT NULL,
