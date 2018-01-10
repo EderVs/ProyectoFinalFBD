@@ -110,7 +110,6 @@ ALTER TABLE Mobiliario ADD CONSTRAINT ch_tipo CHECK (tipo IN ('MESA','SILLA','BA
 ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DEBITO','TARJETA CREDITO','CRYPTOCURRENCY','VALES'));
 ALTER TABLE Pedido ADD CONSTRAINT ch_preparado CHECK (preparado IN (0,1)); --Valores booleanos.
 ALTER TABLE Pedido ADD CONSTRAINT ch_entregado CHECK (entregado IN (0,1)); --Valores booleanos.
-ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
 ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
 ALTER TABLE ProductoLeyenda ADD CONSTRAINT ch_ley CHECK (leyenda IN ('VEGANO','ESPECIAL','ORGANICO','DELUXE','RECOMENDACION','LIGHT','HOT')); --No puede tener un producto una cantidad negativa de un ingrediente.
 ALTER TABLE ProveerIng ADD CONSTRAINT ch_precio_ping CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.

@@ -162,7 +162,6 @@ CREATE TABLE Poseer(
 
 CREATE TABLE Producto(
         idProducto INTEGER NOT NULL,
-        puntosOtorgar INTEGER NOT NULL,
         nombre varchar2(200) NOT NULL,
         precio FLOAT(2) NOT NULL,
         descripcion VARCHAR2(200) NOT NULL
