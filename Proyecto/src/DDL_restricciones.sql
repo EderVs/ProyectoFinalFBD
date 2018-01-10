@@ -1,4 +1,4 @@
-##########################################################################
+-- ##########################################################################
 -- Nombre            : DDL_restricciones.sql.
 -- Fecha             : 12 de enero del 2018.
 -- Autores           : Flores Martínez Andrés, 
@@ -15,7 +15,7 @@
 --                     llaves foráneas y las de dominio (chequeos y unicidad).
 --                     Lo corresondiente a las marcas NULL ya fue manejado
 --                     directamente en el archivo DDL_creación.sql  
-##########################################################################
+-- ##########################################################################
 
 /**
   * INTEGRIDADES DE ENTIDAD DE LLAVES PRIMARIAS.
@@ -126,4 +126,4 @@ ALTER TABLE Cliente ADD CONSTRAINT unq_email_cl UNIQUE (email); --Hay una direcc
 ALTER TABLE Empleado ADD CONSTRAINT unq_email_emp UNIQUE (email); --Hay una dirección de correo electrónico para cada empleado; no coinciden.
 ALTER TABLE Proveedor ADD CONSTRAINT unq_razonSocial_prov UNIQUE (razonSocial); --No puede haber legalmente dos proveedores con la misma razón social. 
 ALTER TABLE Proveedor ADD CONSTRAINT unq_email_prov UNIQUE (email); --Hay una direccón de correo electrónico para cada proveedor; no coinciden.
-ALTER TABLE Producto ADD CONSTRAINT unq_nombre_prod (nombre); --Hay un único nombre para cada producto de la taquería.
+ALTER TABLE Producto ADD CONSTRAINT unq_nombre_prod UNIQUE (nombre); --Hay un único nombre para cada producto de la taquería.
