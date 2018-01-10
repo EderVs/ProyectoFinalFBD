@@ -1,6 +1,15 @@
 # ProyectoFinalFBD
 Proyecto para la taquería Tacoste
 
+Instrucciones para el Eder:
+
+
+- DDL_creación.sql
+- DDL_restricciones.sql
+- Triggers (5 archivos)
+- metesaca1000000
+
+
 ```
 project
 │   README.md
