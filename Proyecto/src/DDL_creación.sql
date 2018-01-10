@@ -152,7 +152,7 @@ CREATE TABLE Pedido(
         taquiClave INTEGER NOT NULL,
         metodoPago VARCHAR2(50) NOT NULL,
         preparado NUMBER(1) NOT NULL,
-        entregado NUMBER(1) NOT NULL,
+        entregado NUMBER(1) NOT NULL
 );
 
 CREATE TABLE Poseer(
