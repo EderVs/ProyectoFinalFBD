@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
@@ -99,6 +99,7 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
+
 class Productoleyenda(models.Model):
     idproducto = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idproducto')
     leyenda = models.CharField(max_length=50, blank=True, null=True)
@@ -109,3 +110,35 @@ class Productoleyenda(models.Model):
 
     def __str__(self):
         return str(self.idproducto) + " " + str(self.leyenda)
+
+
+class Pedido(models.Model):
+    numpedido = models.BigIntegerField(primary_key=True)
+    idsucursal = models.ForeignKey('Sucursal', models.DO_NOTHING, db_column='idsucursal')
+    fechapedido = models.DateField()
+    taquiclave = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='taquiclave')
+    metodopago = models.CharField(max_length=50)
+    preparado = models.BooleanField(default=False)
+    entregado = models.BooleanField(default=False)
+
+    class Meta:
+        managed = True
+        db_table = 'pedido'
+
+    def __str__(self):
+        return str(self.numpedido) + " | " + str(self.idsucursal) + " | " + str(self.taquiclave)
+
+
+class Contener(models.Model):
+    idContener = models.BigIntegerField(primary_key=True)
+    numpedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='numpedido')
+    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='idproducto')
+    cantidad = models.BigIntegerField()
+
+    class Meta:
+        managed = True
+        db_table = 'contener'
+        unique_together = (('numpedido', 'idproducto'),)
+
+    def __str__(self):
+        return str(self.numpedido) + " | " + str(self.idproducto)

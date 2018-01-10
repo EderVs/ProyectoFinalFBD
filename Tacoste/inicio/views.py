@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from . import utils
-from .models import Sucursal, Producto
+from .models import Sucursal, Producto, Pedido, Contener
 
 NOMBRE_APP = "inicio"
 
@@ -66,3 +66,34 @@ def logoutCliente(request):
     logout(request)
     return redirect('index')
 
+def sucursal_pedidos(request, sucursal_id):
+    sucursal = get_object_or_404(Sucursal, pk=sucursal_id)
+    pedidos = Pedido.objects.filter(
+        idsucursal=sucursal.idsucursal, preparado=True, entregado=False
+    )
+    pedidos_format = []
+    for pedido in pedidos:
+        pedido_format = {}
+        conteners = Contener.objects.filter(numpedido=pedido.numpedido)
+        productos = []
+        for contener in conteners:
+            producto_actual = {}
+            producto_actual['producto'] = contener.idproducto
+            producto_actual['cantidad'] = contener.cantidad
+            productos.append(producto_actual)
+        pedido_format['pedido'] = pedido
+        pedido_format['productos'] = productos
+        pedidos_format.append(pedido_format)
+
+    template = NOMBRE_APP + "/pedidos_sucursal.html"
+    context = {
+        'pedidos': pedidos_format,
+    }
+    return render(request, template, context)
+
+
+def pedido_entregado(request, numpedido):
+    pedido = get_object_or_404(Pedido, numpedido=numpedido)
+    pedido.entregado = True
+    pedido.save()
+    return redirect('sucursal_pedidos', pedido.idsucursal.idsucursal)
