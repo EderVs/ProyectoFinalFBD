@@ -21,7 +21,7 @@
 DROP TRIGGER actualiza_historico; 
 DROP SEQUENCE hist_seq;
 DROP TRIGGER update_puntos_cliente;
-DROP TRIGGER categorias_trigger;
+DROP TRIGGER categorias;
 DROP trigger update_fecha_promocion;
 DROP trigger update_ingredientes;
 DROP TRIGGER salsa_aux_trigger;
