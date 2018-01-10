@@ -10,9 +10,34 @@
 -- ========================================================================
 -- Propósito         : A través de las sentencias del lenguje de definición 
 --                     de datos (DDL, "Data Definition Language") del SMBD
---                     Oracle se hace el borrado de las tablas creadas.
+--                     Oracle se hace el borrado de las tablas creadas. 
+--                     Más aún, se hace el borrado de los disparadores y 
+--                     procedimientos almacenados creados anteriormente.
 -- ##########################################################################
 
+/**
+  * Borrado de disparadores ("triggers").
+*/
+DROP TRIGGER actualiza_historico; 
+DROP SEQUENCE hist_seq;
+DROP TRIGGER update_puntos_cliente;
+DROP TRIGGER categorias;
+DROP trigger update_fecha_promocion;
+DROP trigger update_ingredientes;
+DROP TRIGGER salsa_aux_trigger;
+DROP SEQUENCE salsa_seq;
+
+
+/**
+  * Borrado de procedimientos almacenados ("stored procedures").
+*/
+DROP PROCEDURE elimina_caducos;  
+DROP PROCEDURE inc_sal;
+
+
+/**
+  * Borrado de tablas.
+*/
 DROP TABLE Categoria;
 DROP TABLE Recomendar;
 DROP TABLE Tener;

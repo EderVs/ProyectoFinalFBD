@@ -96,7 +96,7 @@ ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente)
   * prestarse a diversas interpretaciones como son datos que no aplican, valores desconocidos, entre otros.
 */
 -- Checks:
-ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
+ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES Y HUARACHES','ENCHILADAS','QUESOS','GRINGAS, QUECAS Y VOLCANES','ALAMBRES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES','SALSAS')); --Quizás haya cosas gratis a veces.
 ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
 ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK (cantidad >= 0); --No puede tener un pedido una cantidad negativa de productos.
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
@@ -110,7 +110,6 @@ ALTER TABLE Mobiliario ADD CONSTRAINT ch_tipo CHECK (tipo IN ('MESA','SILLA','BA
 ALTER TABLE Pedido ADD CONSTRAINT ch_metodoPago CHECK (metodoPago IN ('EFECTIVO','TARJETA DEBITO','TARJETA CREDITO','CRYPTOCURRENCY','VALES'));
 ALTER TABLE Pedido ADD CONSTRAINT ch_preparado CHECK (preparado IN (0,1)); --Valores booleanos.
 ALTER TABLE Pedido ADD CONSTRAINT ch_entregado CHECK (entregado IN (0,1)); --Valores booleanos.
-ALTER TABLE Producto ADD CONSTRAINT ch_num_puntos_prod CHECK (puntosOtorgar >= 0); --No podemos asignar puntos negativos.
 ALTER TABLE Producto ADD CONSTRAINT ch_precio_prod CHECK (precio >= 0); --Quizás haya cosas gratis a veces.
 ALTER TABLE ProductoLeyenda ADD CONSTRAINT ch_ley CHECK (leyenda IN ('VEGANO','ESPECIAL','ORGANICO','DELUXE','RECOMENDACION','LIGHT','HOT')); --No puede tener un producto una cantidad negativa de un ingrediente.
 ALTER TABLE ProveerIng ADD CONSTRAINT ch_precio_ping CHECK (precio >= 0); --Tal vez como parte de una oferta le dé cosas gratis al local.
