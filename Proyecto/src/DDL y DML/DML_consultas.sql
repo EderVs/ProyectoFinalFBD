@@ -1,4 +1,4 @@
-##########################################################################
+-- ##########################################################################
 -- Nombre            : DML_consultas.sql.
 -- Fecha             : 12 de enero del 2018.
 -- Autores           : Flores Martínez Andrés, 
@@ -13,7 +13,7 @@
 --                     el SMBD Oracle, se efectúan consultas sobre los datos
 --                     almacenados para poder extraer información útil sobre
 --                     estos que puedan ser de utilidad para la empresa.
-##########################################################################
+-- ##########################################################################
 
 -- =============================================
 -- Consultas acerca de Sucursales y Productos.
