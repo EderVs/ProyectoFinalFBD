@@ -16,6 +16,25 @@
 -- ##########################################################################
 
 /**
+  * Borrado de disparadores ("triggers").
+*/
+DROP TRIGGER actualiza_historico; 
+DROP SEQUENCE hist_seq;
+DROP TRIGGER update_puntos_cliente;
+DROP TRIGGER categorias_trigger;
+DROP trigger update_fecha_promocion;
+DROP trigger update_ingredientes;
+DROP TRIGGER salsa_aux_trigger;
+DROP SEQUENCE salsa_seq;
+
+
+/**
+  * Borrado de procedimientos almacenados ("stored procedures").
+*/
+DROP PROCEDURE elimina_caducos;  
+
+
+/**
   * Borrado de tablas.
 */
 DROP TABLE Categoria;
@@ -50,20 +69,3 @@ DROP TABLE CPEdoCliente;
 DROP TABLE SucursalTelefono;
 DROP TABLE CPEdoSucursal;
 DROP TABLE Sucursal;
-
-/**
-  * Borrado de disparadores ("triggers").
-*/
-DROP TRIGGER actualiza_historico; 
-DROP SEQUENCE hist_seq;
-DROP TRIGGER update_puntos_cliente;
-DROP TRIGGER categorias_trigger;
-DROP trigger update_fecha_promocion;
-DROP trigger update_ingredientes;
-DROP TRIGGER salsa_aux_trigger;
-DROP SEQUENCE salsa_seq;
-
-/**
-  * Borrado de procedimientos almacenados ("stored procedures").
-*/
-DROP PROCEDURE elimina_caducos;  
