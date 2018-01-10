@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Tacoste | Pedidos</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/pedidos-sucursal.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Nunito" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                </a>
+            </div>
+        </header>
+        <div id="contenido1">
+            <h1> Pedidos </h3>
+            {% if pedidos %}
+            <h2> ¡Vamos A Darle! </h2>
+            {% for pedido in pedidos %}
+            <div class="caja-pedido">
+                <span class="datos-pedido numpedido">
+                    <b>Num. pedido:</b> {{pedido.pedido.numpedido}} 
+                    <a href="{% url 'pedido_entregado' pedido.pedido.numpedido %}">
+                        <input type="submit" class="entregado" value="Entregado">
+                    </a>
+                </span>
+                <span class="datos-pedido cliente">
+                    {{pedido.pedido.taquiclave.nombre}} {{pedido.pedido.taquiclave.apellidopaterno}}
+                </span>
+                <span class="datos-pedido direccion">
+                    {{pedido.pedido.taquiclave.calle}} #{{pedido.pedido.taquiclave.numexterior}}
+                </span>
+                <span class="datos-pedido direccion">
+                    {{pedido.pedido.taquiclave.colonia}}, {{pedido.pedido.taquiclave.municipio}}
+                </span>
+                <span class="datos-pedido direccion">
+                    {{pedido.pedido.taquiclave.cp.estado}}
+                </span>
+                <h4> Productos </h4>
+                {% for producto in pedido.productos %}
+                <div class="producto">
+                    <span class="datos-producto">
+                        <b>{{ producto.producto.taquegoria }}</b>
+                    </span>
+                    <span class="datos-producto">
+                        {{ producto.producto.nombre }}
+                    </span>
+                    <span class="datos-producto">
+                        <b>Cantidad:</b> {{ producto.cantidad }}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% else %}
+            <h2> Aún no hay pedidos :( </h2>
+            {% endif %}
+        </div>
+        </div>
+    </body>
+</html>
