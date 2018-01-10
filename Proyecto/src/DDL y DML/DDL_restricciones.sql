@@ -96,7 +96,7 @@ ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente)
   * prestarse a diversas interpretaciones como son datos que no aplican, valores desconocidos, entre otros.
 */
 -- Checks:
-ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES', 'HUARACHES','GRINGAS','ENCHILADAS','QUESOS','QUECAS','VOLCANES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES')); --Quizás haya cosas gratis a veces.
+ALTER TABLE Categoria ADD CONSTRAINT ch_taquegoria CHECK (taquegoria IN('ENTRADAS','DEL CAZO', 'SOPES Y HUARACHES','ENCHILADAS','QUESOS','GRINGAS, QUECAS Y VOLCANES','ALAMBRES','ENSALADAS','TACOS','HAMBURGUESAS','TORTAS','BEBIDAS','POSTRES','SALSAS')); --Quizás haya cosas gratis a veces.
 ALTER TABLE Cliente ADD CONSTRAINT ch_num_puntos_cl CHECK (numPuntos >= 0); -- No se puede tener una cantidad negativa de puntos.
 ALTER TABLE Contener ADD CONSTRAINT ch_cantidad_cont CHECK (cantidad >= 0); --No puede tener un pedido una cantidad negativa de productos.
 ALTER TABLE Empleado ADD CONSTRAINT ch_tipoSangre CHECK (tipoSangre IN ('O+','O-','A+','A-','B+','B-','AB+','AB-'));
