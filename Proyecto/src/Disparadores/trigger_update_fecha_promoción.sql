@@ -1,15 +1,29 @@
---deseamos que dependiendo del dÃ­a de la semana que se hace una compra, se determine la promociÃ³n de la misma
+-- ##########################################################################
+-- Nombre            : trigger_histórico.sql.
+-- Fecha             : 12 de enero del 2018.
+-- Autores           : Flores Martínez Andrés, 
+--                     Vázquez Salcedo Eduardo Eder,
+--                     Sánchez Pérez Pedro Juan Salvador,
+--                     Concha Vázquez Miguel.
+-- Compañía          : Computólogos A.C., Facultad de Ciencias UNAM.
+-- Cliente           : Taquería Tacoste.
+-- ========================================================================
+-- Propósito         : Se crea un disparador debido a que deseamos que 
+--                     dependiendo del dí­a de la semana que se hace una compra,
+--                     se determine la promoción de la misma.
+-- ##########################################################################
+
 create or replace trigger update_fecha_promocion
 after insert or update of fechaPedido on pedido
 for each row
 declare
-	dia varchar2(15);--variable donde almacenaremos el dia de la semana de la fecha agregada
+	dia varchar2(15); -- Variable donde almacenaremos el día de la semana de la fecha agregada.
     date_already_in number(1);
 begin
     select count(*) into date_already_in from fechaPedPromo where fechaPedido = :new.fechaPedido;
     if date_already_in = 0 then
-        dia := replace(to_char(:new.fechaPedido, 'Day'),' ','');--calculamos el dia de la fecha ingresada quitando espacios a la derecha
-        --dependiendo del día es la promoción que almacenaremos en la respectiva tabla
+        dia := replace(to_char(:new.fechaPedido, 'Day'),' ',''); -- Calculamos el día de la fecha ingresada quitando espacios a la derecha.
+        -- Dependiendo del día es la promoción que almacenaremos en la respectiva tabla.
         if dia = 'Jueves' then
             insert into fechaPedPromo(fechaPedido, promocion) values(:new.fechaPedido, 'JUEVES POZOLERO');
         elsif dia = 'Viernes' then
@@ -22,6 +36,7 @@ begin
     end if;
 end;
 
+-- Ejemplos:
 /*
 INSERT INTO SUCURSAL(IDSUCURSAL, HORAAPERTURA, HORACIERRE, MUNICIPIO, COLONIA, CALLE, CP, NUMINTERIOR, NUMEXTERIOR) VALUES
 (600000, TO_TIMESTAMP ('10-Sep-02 11:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),TO_TIMESTAMP ('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'), 'Elkland', 'Fakenham', '1954 Monument Road', 0, 95, 3914);
