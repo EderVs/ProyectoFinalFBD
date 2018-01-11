@@ -62,10 +62,10 @@ pivot(COUNT(*) for metodoPago in ('EFECTIVO' as Efectivo, --Hacemos el uso de la
 ORDER BY idSucursal; --Por omisión se ordenará ascendentemente por el identificador de cada sucursal.
 
 /**
-  * 4. Un listado con la clave, el nombre de la salsa, el número de productos que recomienda y las veces
+  * 4. Un listado con la clave, el número de productos que recomienda y las veces
   * cuyo precio se ha visto actualizado.
 */
-SELECT idProducto, nombre, numRecomendaciones as "Número de productos que recomienda", numActua as "Número de actualizaciones en precio"
+SELECT idProducto, numRecomendaciones as "Número de productos que recomienda", numActua as "Número de actualizaciones en precio"
 FROM (SELECT idProductoSalsa, COUNT(idProductoSalsa) as numRecomendaciones--Las salsas y el número de productos que recomiendan.
 	 FROM Recomendar 
 	 GROUP BY idProductoSalsa) a 

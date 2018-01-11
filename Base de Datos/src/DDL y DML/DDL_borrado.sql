@@ -26,6 +26,7 @@ DROP trigger update_fecha_promocion;
 DROP trigger update_ingredientes;
 DROP TRIGGER salsa_aux_trigger;
 DROP SEQUENCE salsa_seq;
+DROP SEQUENCE cont_seq;
 
 
 /**
@@ -51,7 +52,6 @@ DROP TABLE Poseer;
 DROP TABLE Licencia;
 DROP TABLE Llevar;
 DROP TABLE TacoRider;
-DROP TABLE CPEdoProveedor;
 DROP TABLE Proveedor;
 DROP TABLE Transporte;
 DROP TABLE Mobiliario;
@@ -68,5 +68,6 @@ DROP TABLE CPEdoEmpleado;
 DROP TABLE Cliente;
 DROP TABLE CPEdoCliente;
 DROP TABLE SucursalTelefono;
-DROP TABLE CPEdoSucursal;
 DROP TABLE Sucursal;
+DROP TABLE CPEdoProveedor;
+DROP TABLE CPEdoSucursal;

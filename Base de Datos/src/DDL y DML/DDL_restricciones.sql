@@ -55,7 +55,7 @@ ALTER TABLE Tener ADD CONSTRAINT pk_idProdidIng PRIMARY KEY(idProducto,idIngredi
 ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
 
 /**
-  * INTEGRIDADES DE ENTIDAD DE LLAVES FORÉNEAS.
+  * INTEGRIDADES DE ENTIDAD DE LLAVES FORÁNEAS.
   * Estableciendo las restricciones de llaves externas para lograr la conexión entre las tablas.
   * Estamos asegurando la integridad referencial al usar casada porque al eliminar un registro de una tabla
   * referenciada, se borran también en las tablas rerenciantes.
@@ -63,7 +63,7 @@ ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
 ALTER TABLE Categoria ADD CONSTRAINT fk_idProducto_cat FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idProducto_cons FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idHistorico FOREIGN KEY(idHistorico) REFERENCES Historico(idHistorico) ON DELETE CASCADE;
-ALTER TABLE Contener ADD CONSTRAINT fk_idnumPedido FOREIGN KEY(numPedido) REFERENCES Pedido(numPedido) ON DELETE CASCADE;
+ALTER TABLE Contener ADD CONSTRAINT fk_numpe_cont FOREIGN KEY(numPedido) REFERENCES Pedido(numPedido) ON DELETE CASCADE;
 ALTER TABLE Contener ADD CONSTRAINT fk_idProducto_cont FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Dirigir ADD CONSTRAINT fk_idSucursal_d FOREIGN KEY(idSucursal) REFERENCES Sucursal(idSucursal) ON DELETE CASCADE;
 ALTER TABLE Dirigir ADD CONSTRAINT fk_taquiClave_d FOREIGN KEY(taquiClave) REFERENCES Empleado(taquiClave) ON DELETE CASCADE;
@@ -89,7 +89,11 @@ ALTER TABLE Supervisar ADD CONSTRAINT fk_tcGer FOREIGN KEY(taquiClaveGerente) RE
 ALTER TABLE Supervisar ADD CONSTRAINT fk_tcSub FOREIGN KEY(taquiClaveSupervisado) REFERENCES Empleado(taquiClave) ON DELETE CASCADE;
 ALTER TABLE TacoRider ADD CONSTRAINT fk_taquiClave_tr FOREIGN KEY(taquiClave) REFERENCES Empleado(taquiClave) ON DELETE CASCADE;
 ALTER TABLE Tener ADD CONSTRAINT fk_idProducto_ten FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
-ALTER TABLE Tener ADD CONSTRAINT fk_idIngrediente_ten FOREIGN KEY(idIngrediente) REFERENCES Ingrediente(idIngrediente) ON DELETE CASCADE;
+ALTER TABLE Cliente ADD CONSTRAINT fk_cpe_cl FOREIGN KEY(CP) REFERENCES CPEdoCliente(CP) ON DELETE CASCADE;
+ALTER TABLE Empleado ADD CONSTRAINT fk_cpe_emp FOREIGN KEY(CP) REFERENCES CPEdoEmpleado(CP) ON DELETE CASCADE;
+ALTER TABLE Sucursal ADD CONSTRAINT fk_cpe_sucu FOREIGN KEY(CP) REFERENCES CPEdoSucursal(CP) ON DELETE CASCADE;
+ALTER TABLE Proveedor ADD CONSTRAINT fk_cpe_prov FOREIGN KEY(CP) REFERENCES CPEdoProveedor(CP) ON DELETE CASCADE;
+ALTER TABLE Empleado ADD CONSTRAINT fk_curp_fnac FOREIGN KEY(CURP) REFERENCES CURPFnacEmp(CURP) ON DELETE CASCADE;
 
 /**
   * INTEGRIDADES DE DOMINIO: UNICIDAD y CHECKS. No incluimos en la base de datos valores nulos que pueden 
