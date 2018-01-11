@@ -11,20 +11,34 @@ Instrucciones para el Eder:
 
 
 ```
-project
+Proyecto
 │   README.md
-│   file001.txt    
-│
-└───folder1
+│      
+└───Base de Datos
 │   │   file011.txt
 │   │   file012.txt
 │   │
-│   └───subfolder1
-│       │   file111.txt
-│       │   file112.txt
-│       │   ...
+│   └───Documentos
+│       │   análisis_requerimientos.pdf
+│       │   aviso_privacidad.pdf
+│       │   diagrama_entidad_relación.pdf
+│       │   diccionario_de_datos.pdf
+│       │   modelo_relacional.pdf
+│       │   normalización.pdf
+│   └───Diagramas	
+│       │   ER.dia
+│       │   ER.png
+│       │   UML_no_normalizado.dia
+│       │   UML_no_normalizado.png
+│       │   UML_normalizado.dia
+│       │   UML_normalizado.png
 │   
-└───folder2
+└───Aplicación
     │   file021.txt
     │   file022.txt
 ```
+
+│   
+│       
+│       
+│       

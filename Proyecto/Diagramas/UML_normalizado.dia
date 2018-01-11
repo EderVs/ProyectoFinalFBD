@@ -307,7 +307,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#CP#</dia:string>
+            <dia:string>#FK CP#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#number(5)#</dia:string>
@@ -610,7 +610,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#CP#</dia:string>
+            <dia:string>#FK CP#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#number(5)#</dia:string>
@@ -1066,7 +1066,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#CP#</dia:string>
+            <dia:string>#FK CP#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#number(5)#</dia:string>
@@ -1365,7 +1365,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#CURP#</dia:string>
+            <dia:string>#FK CURP#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#char(18)#</dia:string>
@@ -1591,7 +1591,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#fechaPedido#</dia:string>
+            <dia:string>#FK fechaPedido#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#date#</dia:string>
@@ -3269,7 +3269,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#CP#</dia:string>
+            <dia:string>#FK CP#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#number(5)#</dia:string>
