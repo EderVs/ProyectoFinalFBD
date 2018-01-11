@@ -32,6 +32,10 @@ Proyecto
 │   │       modelo_relacional.pdf
 │   │       normalización.pdf
 │   │
+│   └───Especifiación
+│   │       MenuTacoste.pdf
+│   │       MenuTacoste.pdf
+│   │
 │   └───LaTeX
 │   │       │
 │   │       └───Análisis de Requerimientos
