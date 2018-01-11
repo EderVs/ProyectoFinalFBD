@@ -24,7 +24,7 @@
 ALTER TABLE Categoria ADD CONSTRAINT pk_categoria PRIMARY KEY(idProducto);
 ALTER TABLE Cliente ADD CONSTRAINT pk_taquiClave_c PRIMARY KEY(taquiClave);
 ALTER TABLE Conservar ADD CONSTRAINT pk_ProdHist PRIMARY KEY(idProducto,idHistorico);
-ALTER TABLE Contener ADD CONSTRAINT pk_numPedidProd PRIMARY KEY(numPedido,idProducto);
+ALTER TABLE Contener ADD CONSTRAINT pk_numPedidProd PRIMARY KEY(numPedido,idProducto,cantidad);
 ALTER TABLE CPEdoCliente ADD CONSTRAINT pk_cp_edoc PRIMARY KEY(CP);
 ALTER TABLE CPEdoEmpleado ADD CONSTRAINT pk_cp_edoemp PRIMARY KEY(CP);
 ALTER TABLE CPEdoProveedor ADD CONSTRAINT pk_cp_edoprov PRIMARY KEY(CP);

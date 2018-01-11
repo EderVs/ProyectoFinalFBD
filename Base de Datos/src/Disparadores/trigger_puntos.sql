@@ -57,12 +57,3 @@ begin
     where idContener = cont_aux;
     insert into contener_Django(numPedido, idProducto, cantidad, idContener) values (:new.numPedido, :new.idProducto, :new.cantidad, idCont);
 end;
-
-select *
-from pedido natural join cliente 
-where numPedido = 46;
-
-select *
-	from (select *--calculamos el costo total de producto, y metemos el 10% a nuevo
-		  from  producto
-		  where idProducto = 40);
