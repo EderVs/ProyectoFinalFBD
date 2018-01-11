@@ -32,5 +32,5 @@ begin
         (select idProducto from (select *  from producto natural join categoria where taqueGoria <> 'SALSAS') where rownum <salsa_count+1
         MINUS
         select idProducto from (select *  from producto natural join categoria where taqueGoria <>  'SALSAS') where rownum <salsa_count);
-        insert into recomendar(idProducto,idProductoSalsa) values (productoid, salsaid);
+        insert into recomendar_aux(idProducto,idProductoSalsa) values (productoid, salsaid);
 end;
