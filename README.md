@@ -1,4 +1,6 @@
 # ProyectoFinalFBD
+![logo_proyecto](https://user-images.githubusercontent.com/13952922/34808438-99e9657e-f654-11e7-8aae-cf15991360de.jpg)
+
 ***
 **Proyecto para la taquería Tacoste realizada por Computólogos A.C. consistente de una base de datos para un manejo escalable y útil de sus:**
 
