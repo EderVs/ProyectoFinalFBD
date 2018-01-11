@@ -26,6 +26,7 @@ DROP trigger update_fecha_promocion;
 DROP trigger update_ingredientes;
 DROP TRIGGER salsa_aux_trigger;
 DROP SEQUENCE salsa_seq;
+DROP SEQUENCE cont_seq;
 
 
 /**
