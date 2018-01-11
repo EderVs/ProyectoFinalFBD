@@ -1,14 +1,51 @@
 # ProyectoFinalFBD
-Proyecto para la taquería Tacoste
+***
+**Proyecto para la taquería Tacoste realizada por Computólogos A.C. consistente de una base de datos para un manejo escalable y útil de sus:**
 
-Instrucciones para el Eder:
+- Sucursales
+- Empleados
+- Clientes
+- Proveedores
+- Productos y Salsas
+- Pedidos
+***
 
+Se espera que el sistema desarrollado por la empresa Computólogos
+A.C. pueda fungir como una herramienta que permita al señor José Cruz
+llevar a cabo su proyecto de expansión con respecto a la cadena mexicana
+de tacos Tacoste, que además sea escalable y permita controlar sucursales
+a lo largo y ancho de la República Mexicana. 
 
-- DDL_creación.sql
-- DDL_restricciones.sql
-- Triggers (5 archivos)
-- metesaca1000000
+A través de las posibilidades económicas del cliente en cuestión y las contingencias de mercado se anhela
+brindarle una solución similar al software que poseen franquicias de tacos
+modernas, mismos que permiten la creación de menús dirigidos y promociones para sectores especı́ficos y que eventualmente conduzcan a la empresa a
+ser competitiva en el mercado y lograr alianzas comerciales que la beneficien.
+Especı́ficamente, se desea:
 
+- Con tal de poder eventualmente conocer el momento de sacar promo-
+ciones, poder llevar un registro histórico de los precios y productos de
+la taquerı́a.
+- Otorgar tickets por cada consumo.
+- Minimizar los desperdicios de las sucursales, identificando para esto la
+cantidad aproximada de porciones de ingredientes a comprar o prepa-
+rar para vender.
+- Implementar un sistema de puntos que permitan a clientes frecuentes
+intercambiar por productos dentro de la taquerı́a sus puntos generados
+a raı́z de sus compras previas.
+- Tener la posibilidad de manejar promociones ciertos dı́as de la semana.
+- Poder ofrecerle a los clientes un sistema de envı́o a domicilio y tener
+un sistema de ventas en lı́nea de sus reconocidas salsas.
+Ofrecer a los clientes presentar distintas formas de pago.
+- Identificar a los empleados con una antigüedad de cinco años para
+ofrecerles un bono especial de mil pesos 00/100 M.N.
+- Tener un control de inventarios para los productos y los ingredientes
+que los componen.
+
+_Nota: Revisar análisis_de_requerimientos.pdf en `Proyecto/Base de Datos/Documentos/análisis_de_requerimientos.pdf` para ahonda más en la especificación y decisiones tomadas por la empresa._
+
+---
+
+**La estructura del proyecto es la siguiente:**
 
 ```
 Proyecto
