@@ -1,0 +1,43 @@
+body {
+    display: block;
+}
+
+input {
+    width: 360px;
+}
+
+#contenido1 {
+    margin: 30px auto;
+    padding: 0 50px;
+    width: 500px;
+}
+
+#contenido2 {
+    margin-bottom: 20px;
+}
+
+.caja-pedido {
+    border: 1px solid #e5e5e5;
+    padding: 30px 50px 20px 50px;
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.datos-pedido {
+    display: block;
+}
+
+.datos-producto {
+    display: block;
+}
+
+.numpedido {
+    margin-bottom: 20px;
+}
+
+.producto {
+    border: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+    padding: 10px 30px;
+    width: 300px;
+}

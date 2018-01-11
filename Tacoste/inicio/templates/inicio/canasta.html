@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Tacoste | Canasta</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'inicio/css/canasta.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Nunito" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
+                </a>
+            </div>
+        </header>
+        <div id="contenido1">
+            <h1> Canasta </h3>
+            {% if productos %}
+            <div id="contenido2">
+                <h3> Productos </h3>
+                <a href="{% url 'pedido_preparado' %}"><input type="submit" value="Ordenar"></a>
+            </div>
+            {% for producto in productos %}
+            <div class="producto">
+                <span class="datos-producto">
+                    <b>{{ producto.producto.taquegoria }}</b>
+                </span>
+                <span class="datos-producto">
+                    {{ producto.producto.nombre }}
+                </span>
+                <span class="datos-producto">
+                    <b>Cantidad:</b> {{ producto.cantidad }}
+                </span>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h2> Tu canasta está vacía </h2>
+            {% endif %}
+        </div>
+        </div>
+    </body>
+</html>

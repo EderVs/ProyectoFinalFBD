@@ -14,7 +14,7 @@ begin
                 insert into categoria(idProducto,taqueGoria) values(:new.idProducto, 'SOPES Y HUARACHES');
         elsif nom in ('Verdes, Rojas, Enfrijoladas o Con salsa guajillo con mole') then
                 insert into categoria(idProducto,taqueGoria) values(:new.idProducto, 'ENCHILADAS');
-        elsif nom in ('Fundido natural','Choriqueso','Chicharron de queso') then
+        elsif nom in ('Fundido natural','Choriqueso','Chicharron') then
                 insert into categoria(idProducto,taqueGoria) values(:new.idProducto, 'QUESOS');
         elsif nom in ('Gringa','Gringa consentida','Gringa vaquera','Gringa loca','Quesadilla tradicional','Quesadilla','Quesadilla especial','Volcanes','Volcanes con carne') then
                 insert into categoria(idProducto,taqueGoria) values(:new.idProducto, 'GRINGAS, QUECAS Y VOLCANES');        
@@ -36,6 +36,9 @@ begin
           insert into categoria(idProducto,taqueGoria) values(:new.idProducto, 'SALSAS');  
     end if;
 end;
+
+DROP TABLE Salsa_aux;
+DROP TABLE Recomendar_aux;
 
 CREATE TABLE Salsa_aux(
         idProducto INTEGER NOT NULL,

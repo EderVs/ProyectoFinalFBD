@@ -146,6 +146,14 @@ header div {
     margin-bottom: 20px;
 }
 
+.hay-pedido {
+    background-color: red;
+    color: white;
+    border-radius:10px;
+    display:inline-block;
+    height: 14px;
+}
+
 .imagen-grande {
     height: 370px;
     position: absolute;
