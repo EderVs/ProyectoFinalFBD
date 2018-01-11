@@ -1,4 +1,6 @@
-# ProyectoFinalFBD
+# Proyecto Final 
+## Fundamentos de Bases de Datos (FBD Semestre 2018-1)
+### Facultad de Ciencias, UNAM.
 ![logo_proyecto](https://user-images.githubusercontent.com/13952922/34808438-99e9657e-f654-11e7-8aae-cf15991360de.jpg)
 
 ***
