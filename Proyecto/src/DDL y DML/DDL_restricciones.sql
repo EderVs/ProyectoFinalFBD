@@ -63,6 +63,7 @@ ALTER TABLE Transporte ADD CONSTRAINT pk_idTransporte PRIMARY KEY(idTransporte);
 ALTER TABLE Categoria ADD CONSTRAINT fk_idProducto_cat FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idProducto_cons FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Conservar ADD CONSTRAINT fk_idHistorico FOREIGN KEY(idHistorico) REFERENCES Historico(idHistorico) ON DELETE CASCADE;
+ALTER TABLE Contener ADD CONSTRAINT fk_numpe_cont FOREIGN KEY(numPedido) REFERENCES Pedido(numPedido) ON DELETE CASCADE;
 ALTER TABLE Contener ADD CONSTRAINT fk_idProducto_cont FOREIGN KEY(idProducto) REFERENCES Producto(idProducto) ON DELETE CASCADE;
 ALTER TABLE Dirigir ADD CONSTRAINT fk_idSucursal_d FOREIGN KEY(idSucursal) REFERENCES Sucursal(idSucursal) ON DELETE CASCADE;
 ALTER TABLE Dirigir ADD CONSTRAINT fk_taquiClave_d FOREIGN KEY(taquiClave) REFERENCES Empleado(taquiClave) ON DELETE CASCADE;
