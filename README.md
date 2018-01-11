@@ -38,7 +38,7 @@ Proyecto
 │   │
 │   └───LaTeX
 │   │       │
-│   │       └───Análisis de Requerimientos
+│   │       └───Análisis de Requerimientos (Decisiones de Diseño)
 │   │       │       análisis_requerimientos.aux
 │   │       │ 		análisis_requerimientos.pdf
 │   │       │	    análisis_requerimientos.synctex.gz
