@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from . import utils
-from .models import Sucursal, Producto, Pedido, Contener
+from .models import Sucursal, Producto, Pedido, Contener, Categoria, Cliente, Fechapedpromo
 
 NOMBRE_APP = "inicio"
 
@@ -18,9 +18,15 @@ def index(request):
         if telefonos.exists():
             sucursal.telefono = telefonos[0]
 
+    cliente = Cliente.objects.get(user = request.user)
+    pedidos = Pedido.objects.filter(
+        taquiclave=cliente.taquiclave, preparado=False, entregado=False
+    )
+
     template = NOMBRE_APP + "/index.html"
     context = {
         'sucursales': sucursales,
+        'hay_pedido': pedidos.exists(),
     }
     return render(request, template, context)
 
@@ -30,10 +36,25 @@ def sucursal(request, sucursal_id, parte_menu):
     telefonos = sucursal.obtener_telefonos()
     if telefonos.exists():
         sucursal.telefono = telefonos[0]
-
+    
+    if parte_menu == 'gringas-quecas-y-volcanes':
+        parte_menu = 'gringas,-quecas-y-volcanes'
     # Obtener los productos de la parte de menu
-    productos = Producto.objects.filter(
-        taquegoria=utils.slug_to_str(parte_menu).title()
+    categorias = Categoria.objects.filter(
+        taquegoria=utils.slug_to_str(parte_menu).upper()
+    )
+    
+    productos = []
+    for categoria in categorias:
+        productos.append(categoria.idproducto)
+
+    if parte_menu == 'gringas,-quecas-y-volcanes':
+        parte_menu = 'gringas-quecas-y-volcanes'
+
+
+    cliente = Cliente.objects.get(user = request.user)
+    pedidos = Pedido.objects.filter(
+        taquiclave=cliente.taquiclave, preparado=False, entregado=False
     )
 
     template = NOMBRE_APP + "/sucursal.html"
@@ -42,6 +63,7 @@ def sucursal(request, sucursal_id, parte_menu):
         'parte_menu': parte_menu,
         'parte_menu_titulo': utils.slug_to_str(parte_menu).title(),
         'productos': productos,
+        'hay_pedido': pedidos.exists(),
     }
     return render(request, template, context)
 
@@ -97,3 +119,73 @@ def pedido_entregado(request, numpedido):
     pedido.entregado = True
     pedido.save()
     return redirect('sucursal_pedidos', pedido.idsucursal.idsucursal)
+
+
+def agregar_producto(request, sucursal_id, idproducto, parte_menu):
+    producto = get_object_or_404(Producto, idproducto=idproducto)
+    cliente = Cliente.objects.get(user = request.user)
+    pedidos = Pedido.objects.filter(
+        taquiclave=cliente.taquiclave, preparado=False, entregado=False
+    )
+    sucursal = get_object_or_404(Sucursal, idsucursal=sucursal_id)
+    # Se tiene que crear una Fechapedpromo con la promo NINGUNA
+    fechapedpromo = Fechapedpromo.objects.filter(promocion='NINGUNA').first()
+    ultimo_pedido = Pedido.objects.all().order_by('numpedido').last()
+    if not pedidos.exists():
+        if ultimo_pedido == None:
+            ultimo_pedido_id = 0
+        else:
+            ultimo_pedido_id = ultimo_pedido.numpedido
+
+        pedido = Pedido(
+            numpedido=ultimo_pedido_id+1, 
+            idsucursal=sucursal,
+            fechapedido=fechapedpromo,
+            taquiclave=cliente,
+            metodopago='EFECTIVO',
+            preparado=False,
+            entregado=False
+        )
+        pedido.save()
+    else:
+        pedido = pedidos.first()
+
+    conteners = Contener.objects.filter(numpedido=pedido, idproducto=producto)
+    if conteners.exists():
+        contener = conteners.first()
+        contener.cantidad = contener.cantidad + 1
+    else:
+        contener = Contener(numpedido=pedido, idproducto=producto, cantidad=1)
+    contener.save()
+
+    return redirect('sucursal', sucursal_id, parte_menu)
+
+
+def canasta(request):
+    cliente = Cliente.objects.get(user = request.user)
+    pedidos = Pedido.objects.filter(
+        taquiclave=cliente.taquiclave, preparado=False, entregado=False
+    )
+    productos = []
+    if pedidos.exists():
+        pedido = pedidos.first()
+        conteners = Contener.objects.filter(numpedido=pedido.numpedido)
+        for contener in conteners:
+            producto_actual = {}
+            producto_actual['producto'] = contener.idproducto
+            producto_actual['cantidad'] = contener.cantidad
+            productos.append(producto_actual)
+
+    template = NOMBRE_APP + "/canasta.html"
+    context = {
+        'productos': productos,
+    }
+    return render(request, template, context)
+
+
+def pedido_preparado(request):
+    cliente = Cliente.objects.get(user = request.user)
+    pedido = get_object_or_404(Pedido, taquiclave=cliente.taquiclave, preparado=False, entregado=False)
+    pedido.preparado = True
+    pedido.save()
+    return redirect('index')

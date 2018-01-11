@@ -16,9 +16,12 @@
             <div id="botones-header">
                 {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}"><div class="boton inicio-sesion boton-header">Cerrar sesion</div></a>
-                <picture id="canasta">
+                <a href="{% url 'canasta' %}"><picture id="canasta">
                     <img src="{% static 'inicio/img/shopping-cart.png' %}">
-                </picture>
+                    </picture></a>
+                {% if hay_pedido %}
+                <div class="hay-pedido">*</div>
+                {% endif %}
                 {% else %}
                 <a href="{% url 'login' %}"><div class="boton inicio-sesion boton-header">Iniciar sesion</div></a>
                 <div class="boton registrate boton-header">Regístrate</div>
@@ -27,7 +30,7 @@
         </header>
         <div class="imagen-grande">
             <picture>
-                <img src="{% static 'inicio/img/tacos-header.jpg' %}">
+                <img src="{% static 'inicio/img/BLOG-TACOS.png' %}">
             </picture>
         </div>
         <div id="contenido">

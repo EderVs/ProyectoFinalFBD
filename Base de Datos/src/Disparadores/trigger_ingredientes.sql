@@ -1,5 +1,5 @@
 -- ##########################################################################
--- Nombre            : trigger_histórico.sql.
+-- Nombre            : trigger_ingredientes.sql.
 -- Fecha             : 12 de enero del 2018.
 -- Autores           : Flores Martínez Andrés, 
 --                     Vázquez Salcedo Eduardo Eder,
