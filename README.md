@@ -113,6 +113,10 @@ Proyecto
 │   │               normalización.tex
 │   │               normalización.toc
 │   │
+│   └───Logos
+│   │     logo_computólogos.png
+│   │     logo_tacoste.png
+│   │
 │   └───src
 │        └───DDL y DML
 │        │      DDL_borrado.sql
