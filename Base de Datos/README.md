@@ -3,7 +3,7 @@
 
 ***
 
-Nos refriremos a continuación al directorio `ProyectoFinal/Base de Datos/src`
+Nos refriremos a continuación al directorio `ProyectoFinalFBD/Base de Datos/src`
 ***
 
 ## **Pasos (Se supone instalado y ya creado un nuevo usuario en SQLDeveloper):**
