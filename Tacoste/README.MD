@@ -1,5 +1,9 @@
 # Pasos a Realizar con la aplicación en Django:
 
+![04_-_image](https://user-images.githubusercontent.com/13952922/34891589-b47c3248-f79b-11e7-9899-ba3936134bc9.png)
+
+***
+
 - Hacer 'python manage.py makemigrations'
 - Hacer 'python manage.py migrate'
 - Modificar el managed = False a True de Cliente
