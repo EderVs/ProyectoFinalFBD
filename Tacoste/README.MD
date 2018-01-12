@@ -1,4 +1,4 @@
-# Pasos a Realizar con la aplicaciiñon en Django
+# Pasos a Realizar con la aplicación en Django:
 
 - Hacer 'python manage.py makemigrations'
 - Hacer 'python manage.py migrate'
