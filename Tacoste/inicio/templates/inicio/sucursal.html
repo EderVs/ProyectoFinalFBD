@@ -219,7 +219,10 @@
                 <h2 id="menu-titulo">{{ parte_menu_titulo }}</h2>
                 <div>
                     {% for producto in productos %}
-                    <a href="{% url 'agregar_producto' sucursal.idsucursal producto.idproducto parte_menu %}"><article class="caja">
+                    {% if user.is_authenticated%}
+                    <a href="{% url 'agregar_producto' sucursal.idsucursal producto.idproducto parte_menu %}">
+                    {% endif %}
+                        <article class="caja">
                         <div class="caja-contenido">
                             <h3 class="platillo-info">
                                 <span class="platillo-nombre">
@@ -228,7 +231,7 @@
                             </h3>
                             <h4>
                                 <span class="platillo-descripcion">
-                                    Descripción
+                                    {{ producto.descripcion }}
                                 </span>
                                 <span class="platillo-precio">
                                     ${{ producto.precio }}
@@ -236,7 +239,10 @@
                             </h4>
                         </div>
                     <img src="{% static 'inicio/img/sucursal.jpg' %}">
-                    </article></a>
+                    </article>
+                    {% if user.is_authenticated%}
+                    </a>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -246,11 +252,10 @@
                         <img src="{% static 'inicio/img/Tacoste-logo.png' %}">
                     </picture>
                     <div id="footer-enlaces">
-                        <span class="footer-enlaces">¿Quienes somos?</span>
+                        <span class="footer-enlaces">El mejor Team para Tacos</span>
                         <span class="footer-enlaces">©2018</span>
                         <div id="privacidad-terminos">
-                            <span class="footer-enlaces">Privacidad</span>
-                            <span class="footer-enlaces">Términos</span>
+                            <a href="https://github.com/EderVs/ProyectoFinalFBD/blob/master/Base%20de%20Datos/Documentos/aviso_privacidad.pdf"><span class="footer-enlaces">Privacidad</span></a>
                         </div>
                     </div>
                 </div>

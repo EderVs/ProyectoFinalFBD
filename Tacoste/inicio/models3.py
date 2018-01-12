@@ -56,7 +56,18 @@ class Contener(models.Model):
     class Meta:
         managed = False
         db_table = 'contener'
-        unique_together = (('numpedido', 'idproducto'),)
+        unique_together = (('numpedido', 'idproducto', 'cantidad'),)
+
+
+class ContenerDjango(models.Model):
+    numpedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='numpedido', blank=True, null=True)
+    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='idproducto', blank=True, null=True)
+    cantidad = models.BigIntegerField(blank=True, null=True)
+    idcontener = models.BigIntegerField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'contener_django'
 
 
 class Cpedocliente(models.Model):
@@ -206,7 +217,7 @@ class Mobiliario(models.Model):
 class Pedido(models.Model):
     numpedido = models.BigIntegerField(primary_key=True)
     idsucursal = models.ForeignKey('Sucursal', models.DO_NOTHING, db_column='idsucursal')
-    fechapedido = models.ForeignKey(Fechapedpromo, models.DO_NOTHING, db_column='fechapedido')
+    fechapedido = models.DateField()
     taquiclave = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='taquiclave')
     metodopago = models.CharField(max_length=50)
     preparado = models.BooleanField()
@@ -298,23 +309,13 @@ class Recomendar(models.Model):
 
 
 class Salsa(models.Model):
-    idproducto = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idproducto', primary_key=True)
-    presentacion = models.CharField(max_length=70)
-    scoville = models.CharField(max_length=20)
-
-    class Meta:
-        managed = False
-        db_table = 'salsa'
-
-
-class SalsaAux(models.Model):
     idproducto = models.BigIntegerField()
     presentacion = models.CharField(max_length=70)
     scoville = models.CharField(max_length=20)
 
     class Meta:
         managed = False
-        db_table = 'salsa_aux'
+        db_table = 'salsa'
 
 
 class Sucursal(models.Model):
@@ -363,7 +364,7 @@ class Tacorider(models.Model):
 
 class Tener(models.Model):
     idproducto = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idproducto', primary_key=True)
-    idingrediente = models.ForeignKey(Ingrediente, models.DO_NOTHING, db_column='idingrediente')
+    idingrediente = models.BigIntegerField()
     cantidad = models.FloatField()
 
     class Meta:
