@@ -6,7 +6,7 @@
 Nos refriremos a continuación al directorio `ProyectoFinal/Base de Datos/src`
 ***
 
-Pasos (Se supone instalado y ya creado un nuevo usuario en SQLDeveloper):
+## **Pasos (Se supone instalado y ya creado un nuevo usuario en SQLDeveloper):**
 
 1. Ir a la carpeta `DDL y DML`:
   - Usar el script `DDL y DML/DDL_creación.sql`.
