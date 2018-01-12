@@ -19,7 +19,6 @@
 -- Consultas acerca de Sucursales y Productos.
 -- =============================================
 
-
 /**
   * 1. Los 20 producto más vendido en la taquería y su número de ventas.
 */
@@ -63,18 +62,74 @@ pivot(COUNT(*) for metodoPago in ('EFECTIVO' as Efectivo, --Hacemos el uso de la
 ORDER BY idSucursal; --Por omisión se ordenará ascendentemente por el identificador de cada sucursal.
 
 /**
-  * 4. 
+  * 4. El empleado que gana más por cada sucursal.
 */
-
+SELECT idSucursal, nombre, apellidoPaterno, apellidoMaterno, fechaContratacion, concat('$',maxSalario) as "Salario" --Le agregamos el signo de pesos.
+FROM Empleado NATURAL JOIN (SELECT idsucursal, max(salario) maxSalario --Tenemos el salario máximo de cada sucursal, así que hacemos el join natural con los empleados.
+                            FROM (SELECT salario, idSucursal --Tenemos a los salarios de cada empleado y a la clave de la sucursal donde laboran. 
+                                  FROM Empleado
+                                  order by salario desc) --Los ordenamos descendentemente de acuerdo al salario.
+                            GROUP by idSucursal --Tenemos que agrupar por sucursal de acuerdo a su clave.
+                            ORDER by idSucursal) --Los ordenamos en orden ascendente de acuerdo a la llave de las sucursales, que es su id.
+WHERE salario = maxSalario --Checamos que el salacio del empleado coincida con el máximo.
+ORDER BY idSucursal; --Y ordenamos nuevamente en orden ascendente por la clave de las sucursales.
 
 /**
-  * 5. 
+  * 5. Un listado con los directores de cada Sucursal, además de su fecha de contratación, años como directores
+  * y número de empleados que tienen como supervisados a su comando.
 */
-
+SELECT a.*, numSupervisados --Toda la información de la primer suconsulta y el número de supervisados.
+FROM (SELECT s.idSucursal, --Seleccionamos al información que nos interesa. Usamos notación punto para no dar lugar a confusiones.
+             s.calle, 
+             s.colonia,
+             estado, 
+             e.taquiClave
+             e.nombre,
+             e.apellidoPaterno,
+             e.apellidoMaterno, 
+             e.fechaContratacion, 
+             CONCAT(TRUNC(MONTHS_BETWEEN(CURRENT_DATE,d.fechaInicio)/12),' años') AS "Años como Director" 
+      FROM CPEdoSucursal NATURAL JOIN Sucursal s --Queremos el estado.
+                         NATURAL JOIN Dirigir d  --En dirigir tenemos a los directores de las sucursales.
+                         JOIN Empleado e ON d.taquiClave = e.taquiClave) a INNER JOIN  --En empleado tenemos el resto de la información de los directores.
+     (SELECT taquiClaveGerente, COUNT(taquiClaveGerente) as numSupervisados --Segunda subconsulta para determinar el número de supervisados por gerente.
+      FROM Supervisar --Al usar la función de agregación de conteo sobre la tabla de Supervisar y agrupar por la clave de los gerentes tenemos lo que requerimos.
+      GROUP BY taquiClaveGerente) b ON a.taquiClave = b.taquiClaveGerente --Un join para empatar la información de las dos subconsultas.
+/**
+  * 5. Un listado con las tres horas que son más fructíferas para la taquería por sucursal y 
+  * cuántos pedidos se registraron en dichos horarios.
+*/
+SELECT to_char(fecha,'hh24') Hora, COUNT(Hora) as numPedidos
+FROM Pedido
+GROUP BY Hora 
+ORDER BY numPedidos DESC
+WHERE ROWNUM <= 3;
 
 /**
-  * 6. 
+  * 6. Cantidad de ventas por categoría por cada una de las sucursales, con la información
+  * más pertinente de la dirección de la sucursal.
 */
+SELECT a.*, calle, colonia, municipio, estado --Seleccionamos todo lo de la primer subconsulta y los datos de dirección de la sucursal.
+FROM (SELECT *
+      FROM (SELECT idSucursal, taquegoria
+            FROM Sucursal NATURAL JOIN Pedido NATURAL JOIN Categoria) r --Necesitamos hacer joins hasta la tabla de Categoría poruqe ahí tenemos las taquegorías de los productos.
+     pivot(COUNT(*) for taquegoria IN ('ENTRADAS' AS Entradas, --Usamos el operador relacional para colocar las categorías como nuevas columnas.
+                                       'DEL CAZO' AS "Del cazo", --Hacemos el renombrado de las categorías como aparecerán en las columnas.
+                                       'SOPES Y HUARACHES' AS "Sdopes y Huaraches",
+                                       'ENCHILADAS' AS Enchiladas,
+                                       'QUESOS' AS Quesos,
+                                       'GRINGAS' AS Gringas, 
+                                       'QUECAS Y VOLCANES' AS "Quecas y Volcanes",
+                                       'ALAMBRES' AS Alambres,
+                                       'ENSALADAS' AS Ensaladas,
+                                       'TACOS' AS Tacos,
+                                       'HAMBURGUESAS' AS Hamburguesas,
+                                       'TORTAS' AS Tortas,
+                                       'BEBIDAS' AS Bebidas,
+                                       'POSTRES' AS Postres,
+                                       'SALSAS' AS Salsas))
+ORDER BY idSucursal) a INNER JOIN sucursal b ON a.idSucursal = b.idSucursal NATURAL JOIN CPEdoSucursal; --Necesitamos hacer este join para considerar el estado de la sucursal.
+
 
 -- =============================================
 -- Consultas acerca de Empleados y Proveedores.
@@ -136,8 +191,15 @@ FROM (SELECT *
       ORDER BY idSucursal) a INNER JOIN Sucursal b ON a.idSucursal = b.idSucursal NATURAL JOIN CPEdoSucursal; --Queremos también el estado
 
 /**
-  * 11. 
+  * 11. Los diez tacoriders que más pedidos han llevado.
 */ 
+SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, pedidosLlevados --Seleccionamos los datos básicos del repartidor y el número de pedidos llevados.
+FROM Empleado natural join (SELECT taquiclave, count(numPedido) as pedidosLlevados --En esta subconsulta agrupamos por los pedidos registrados por cada taquiclave de TacoRider.
+							FROM Llevar --Para este fin nos referimos a la tabla 'Llevar' que contiene esta información.
+							GROUP BY taquiclave --Agrupamos por la clave de repartidor-
+							ORDER BY pedidosLlevados DESC) --Y los ordenamos de más a menos pedidos (descendentemente).
+WHERE rownum <= 10; --Nos quedamos solamente con las tuplas de interés.
+
 
 -- =============================================
 -- Consultas acerca de Clientes y Pedidos.
@@ -170,8 +232,18 @@ FROM (SELECT taquiClave, idProducto, fechaPedido, metodoPago, taqueGoria
                 AND EXTRACT(YEAR FROM fechaPedido) = 1970) a INNER JOIN Cliente b ON a.taquiClave = b.taquiClave;
                 
 /**
-  * 14. 
+  * 14. Un listado con los clientes que han efectuado pedidos, mismos que han sido preparados, más no entregados.
+  * Los pedidos están ahora en tránsito y serán entregados por un TacoRider en bicicleta.
 */
+SELECT cl.*, p.numPedido, p.preparado, p.entregado, t.taquiClave as "Clave de repartidor", tr.tipo 
+FROM Cliente cl INNER JOIN Pedido p ON cl.taquiClave = p.taquiClave 
+                INNER JOIN Llevar l ON p.numPedido = l.numPedido
+                INNER JOIN TacoRider t ON l.taquiClave = t.taquiClave
+                INNER JOIN Poseer po ON t.taquiClave = po.taquiClave 
+                INNER JOIN Transporte tr ON po.idTransporte = tr.idTransporte
+WHERE tr.tipo = 'BICICLETA' AND 
+      p.preparado = 1 AND
+      p.entregado = 0  
 
 /**
   * 15. Un listado de aquellos clientes que hayan sido asiduos de la taquería por un periodo superior a los tres años,
