@@ -69,6 +69,19 @@ ProyectoFinalFBD
 │   │       UML_normalizado.png
 │   │
 │   └───Documentos
+│   │           └───Reportes
+│   │                    clientes_3_años.pdf
+│   │                    clientes_con_pedidos_transito.pdf
+│   │                    clientes_tortas_cripto.pdf
+│   │                    empleados_que_mas_ganan_por_suc.pdf
+│   │                    ingredientes_menos_prov.pdf
+│   │                    metodos_de_pago_por_sucursal.pdf
+│   │                    productos_mas_vendidos.pdf
+│   │                    salsas_mas_vendidas.pdf
+│   │                    supervisores_riders_torta.pdf
+│   │                    taco_riders_tercer_trimestre.pdf
+│   │                    tipos_de_empleado_por_sucursal.pdf
+│   │                    ventas_por_categoria.pdf
 │   │       análisis_requerimientos.pdf
 │   │       aviso_privacidad.pdf
 │   │       diagrama_entidad_relación.pdf
