@@ -62,7 +62,7 @@ class Sucursal(models.Model):
     numexterior = models.BigIntegerField()
 
     class Meta:
-        managed = False#True
+        managed = False
         db_table = 'sucursal'
 
     def __str__(self):
@@ -77,7 +77,7 @@ class Cpedosucursal(models.Model):
     estado = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False # True
+        managed = False
         db_table = 'cpedosucursal'
 
     def __str__(self):
@@ -89,7 +89,7 @@ class Sucursaltelefono(models.Model):
     telefono = models.CharField(max_length=20)
 
     class Meta:
-        managed = False # True
+        managed = False
         db_table = 'sucursaltelefono'
 
     def __str__(self):
@@ -103,7 +103,7 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=200)
 
     class Meta:
-        managed = False# True
+        managed = False
         db_table = 'producto'
 
     def __str__(self):
@@ -115,7 +115,7 @@ class Productoleyenda(models.Model):
     leyenda = models.CharField(max_length=50)
 
     class Meta:
-        managed = False # True
+        managed = False
         db_table = 'productoleyenda'
         unique_together = (('idproducto', 'leyenda'),)
 
@@ -154,23 +154,22 @@ class Pedido(models.Model):
     entregado = models.BooleanField()
 
     class Meta:
-        managed = False # True
+        managed = False
         db_table = 'pedido'
 
     def __str__(self):
         return str(self.numpedido) + " | " + str(self.idsucursal) + " | " + str(self.taquiclave)
 
 
-class Contener(models.Model):
-    # idContener = models.BigIntegerField(primary_key=True)
-    numpedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='numpedido', primary_key=True)
-    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='idproducto')
-    cantidad = models.BigIntegerField()
+class ContenerDjango(models.Model):
+    numpedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='numpedido', blank=True, null=True)
+    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='idproducto', blank=True, null=True)
+    cantidad = models.BigIntegerField(blank=True, null=True)
+    idcontener = models.BigIntegerField(primary_key=True)
 
     class Meta:
-        managed = False # True
-        db_table = 'contener'
-        unique_together = (('numpedido', 'idproducto'),)
+        managed = False
+        db_table = 'contener_django'
 
     def __str__(self):
         return str(self.numpedido) + " | " + str(self.idproducto)

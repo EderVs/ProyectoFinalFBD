@@ -33,6 +33,22 @@ footer {
     width: 60%;
 }
 
+footer a:link {
+    color: white;
+}
+
+footer a:visited {
+    color: white;
+}
+
+footer a:hover {
+    color: white;
+}
+
+footer a:active {
+    color: white;
+}
+
 header {
     border-bottom: 0.20px solid #e5e5e5;
     height: 50px;
