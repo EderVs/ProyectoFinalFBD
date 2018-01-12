@@ -71,3 +71,4 @@ DROP TABLE SucursalTelefono;
 DROP TABLE Sucursal;
 DROP TABLE CPEdoProveedor;
 DROP TABLE CPEdoSucursal;
+DROP TABLE contener_django; --Tabla auxiliar necesario por la aplicación.
