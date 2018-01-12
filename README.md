@@ -52,8 +52,11 @@ _Nota: Revisar análisis_de_requerimientos.pdf en `Proyecto/Base de Datos/Docume
 **La estructura del proyecto es la siguiente:**
 
 ```
-Proyecto
-│   README.md
+ProyectoFinalFBD
+│   
+└───Aplicación
+│     file021.txt
+│     file022.txt
 │      
 └───Base de Datos
 │   │   
@@ -75,7 +78,7 @@ Proyecto
 │   │
 │   └───Especifiación
 │   │       MenuTacoste.pdf
-│   │       MenuTacoste.pdf
+│   │       ProyectoFinal2018-1.pdf
 │   │
 │   └───LaTeX
 │   │       │
@@ -142,8 +145,8 @@ Proyecto
 │        └───Procedimientos Almacenados
 │           	sp_elimina_caduco.sql
 │           	sp_incrementa_salario.sql
-│   
-└───Aplicación
-    │   file021.txt
-    │   file022.txt
+│
+│        README.md
+│
+│  README.md      
 ```
