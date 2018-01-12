@@ -83,27 +83,18 @@ FROM (SELECT s.idSucursal, --Seleccionamos al información que nos interesa. Usa
              s.calle, 
              s.colonia,
              estado, 
-             e.taquiClave
+             e.taquiClave,
              e.nombre,
              e.apellidoPaterno,
              e.apellidoMaterno, 
              e.fechaContratacion, 
              CONCAT(TRUNC(MONTHS_BETWEEN(CURRENT_DATE,d.fechaInicio)/12),' años') AS "Años como Director" 
-      FROM CPEdoSucursal NATURAL JOIN Sucursal s --Queremos el estado.
-                         NATURAL JOIN Dirigir d  --En dirigir tenemos a los directores de las sucursales.
-                         JOIN Empleado e ON d.taquiClave = e.taquiClave) a INNER JOIN  --En empleado tenemos el resto de la información de los directores.
+      FROM CPEdoSucursal z inner JOIN Sucursal s on z.cp = s.cp--Queremos el estado.
+                         inner JOIN Dirigir d on s.idsucursal = d.idsucursal  --En dirigir tenemos a los directores de las sucursales.
+                         inner JOIN Empleado e ON d.taquiClave = e.taquiClave) a INNER JOIN  --En empleado tenemos el resto de la información de los directores.
      (SELECT taquiClaveGerente, COUNT(taquiClaveGerente) as numSupervisados --Segunda subconsulta para determinar el número de supervisados por gerente.
       FROM Supervisar --Al usar la función de agregación de conteo sobre la tabla de Supervisar y agrupar por la clave de los gerentes tenemos lo que requerimos.
-      GROUP BY taquiClaveGerente) b ON a.taquiClave = b.taquiClaveGerente --Un join para empatar la información de las dos subconsultas.
-/**
-  * 5. Un listado con las tres horas que son más fructíferas para la taquería por sucursal y 
-  * cuántos pedidos se registraron en dichos horarios.
-*/
-SELECT to_char(fecha,'hh24') Hora, COUNT(Hora) as numPedidos
-FROM Pedido
-GROUP BY Hora 
-ORDER BY numPedidos DESC
-WHERE ROWNUM <= 3;
+      GROUP BY taquiClaveGerente) b ON a.taquiClave = b.taquiClaveGerente; --Un join para empatar la información de las dos subconsultas.
 
 /**
   * 6. Cantidad de ventas por categoría por cada una de las sucursales, con la información
@@ -210,7 +201,7 @@ WHERE rownum <= 10; --Nos quedamos solamente con las tuplas de interés.
   * número de pedido de los diez clientes que han realizado más pedidos en las distintas 
   * sucursales de la taquería, además de que tienen el mayor número de puntos
 */
-SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, numPuntos, numPedidos as "Número de Pedidos"  
+SELECT taquiClave, nombre, apellidoPaterno, apellidoMaterno, email, numPuntos, Pedidos as "Número de Pedidos"  
 FROM
     (SELECT * 
      FROM (SELECT COUNT(taquiClave) AS Pedidos, taquiClave
@@ -222,7 +213,7 @@ FROM
                                      ORDER BY numPuntos desc); --Ordenamos los puntos descendentemente.
 
 /**
-  * 13. Clientes que en el año 2008 compro QUECAS y pago con CRYPTOCURRENCY 
+  * 13. Clientes que en el año 1970 compró Tortas y pago con CRYPTOCURRENCY 
 */
 SELECT idProducto, fechaPedido, metodoPago, taqueGoria, nombre, apellidoPaterno, apellidoMaterno 
 FROM (SELECT taquiClave, idProducto, fechaPedido, metodoPago, taqueGoria
@@ -243,7 +234,7 @@ FROM Cliente cl INNER JOIN Pedido p ON cl.taquiClave = p.taquiClave
                 INNER JOIN Transporte tr ON po.idTransporte = tr.idTransporte
 WHERE tr.tipo = 'BICICLETA' AND 
       p.preparado = 1 AND
-      p.entregado = 0  
+      p.entregado = 0;  
 
 /**
   * 15. Un listado de aquellos clientes que hayan sido asiduos de la taquería por un periodo superior a los tres años,
