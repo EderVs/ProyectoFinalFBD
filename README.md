@@ -55,8 +55,17 @@ _Nota: Revisar análisis_de_requerimientos.pdf en `Proyecto/Base de Datos/Docume
 ProyectoFinalFBD
 │   
 └───Aplicación
-│     file021.txt
-│     file022.txt
+│          └───Tacoste
+│          │       __init__.py
+│          │       settings.py
+│          │       urls.py
+│          │       wsgi.py
+│          └───Inicio
+│                ...
+│
+│
+│     README.MD
+│     manage.py
 │      
 └───Base de Datos
 │   │   
@@ -161,5 +170,9 @@ ProyectoFinalFBD
 │
 │        README.md
 │
-│  README.md      
+│   .DS_Store
+│   .gitignore
+│   BorrarTablasDjango.sql
+│   README.md   
+│   requirements.txt   
 ```
