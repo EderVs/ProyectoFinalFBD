@@ -23,15 +23,15 @@ class Cliente(models.Model):
     numexterior = models.BigIntegerField()
     fechaprimervista = models.DateField()
     numpuntos = models.BigIntegerField()
-    user = models.OneToOneField(#
-        User,#
-        on_delete=models.CASCADE,#
-        null=True,#
-        default= None
-    )#
+#    user = models.OneToOneField(#
+#        User,#
+#        on_delete=models.CASCADE,#
+#        null=True,#
+#        default= None
+#    )#
 
     class Meta:
-        managed = True#True
+        managed = False#True
         db_table = 'cliente'
 
     def __str__(self):
